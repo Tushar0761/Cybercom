@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+}
+.images img {
+  height: 315px;
+  width: 215px;
+  object-fit: cover;
+}
+
+main {
+  height: 70vh;
+}
+.imgCaption {
+  color: white;
+  background: rgba(77, 77, 77, 0.5);
+}
