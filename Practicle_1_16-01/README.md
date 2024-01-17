@@ -4,7 +4,8 @@
 
 **Create a HTML page as per below image**
 ![Alt text](./images/sample.png)
+
 **Technologies used**
-*HTML
-*CSS
-*Bootstrap
+* HTML
+* CSS
+* Bootstrap
