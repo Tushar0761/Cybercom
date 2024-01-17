@@ -1,0 +1,30 @@
+table,
+th,
+td,
+tr {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px 15px;
+}
+table {
+  width: 70%;
+}
+
+#Heading,
+#cmp {
+  background: #5ff35a;
+  font-size: large;
+}
+
+table th:nth-child(1) {
+  background: rgba(109, 130, 250, 0.781);
+}
+
+table tr td:nth-child(3),
+#third {
+  background: rgba(233, 139, 171, 0.945);
+}
+table tr td:nth-child(4),
+#fourth {
+  background: rgb(229, 250, 135);
+}
