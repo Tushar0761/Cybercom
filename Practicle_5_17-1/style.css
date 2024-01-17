@@ -1,0 +1,25 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main {
+  width: 450px;
+}
+nav {
+  margin: 10px 0;
+  background-image: url(./Images/bg.jpg);
+  height: 20vh;
+  text-transform: uppercase;
+}
+form * {
+  margin: 5px 0;
+  height: 7vh;
+}
+textarea {
+  height: 20vh;
+}
