@@ -10,3 +10,5 @@
 | 2         | [Repo📁](https://github.com/Tushar0761/Cybercom/tree/main/Practicle_2_17-1)  | [Live🚀](https://tushar0761.github.io/Cybercom/Practicle_2_17-1/)  | 17-01-2024 |
 | 3         | [Repo📁](https://github.com/Tushar0761/Cybercom/tree/main/Practicle_3_17-01) | [Live🚀](https://tushar0761.github.io/Cybercom/Practicle_3_17-01/) | 17-01-2024 |
 | 4         | [Repo📁](https://github.com/Tushar0761/Cybercom/tree/main/Practicle_4_17-1)  | [Live🚀](https://tushar0761.github.io/Cybercom/Practicle_4_17-1/)  | 17-01-2024 |
+| 5         | [Repo📁](https://github.com/Tushar0761/Cybercom/tree/main/Practicle_5_17-1)  | [Live🚀](https://tushar0761.github.io/Cybercom/Practicle_5_17-1/)  | 17-01-2024 |
+| 6         | [Repo📁](https://github.com/Tushar0761/Cybercom/tree/main/Practicle_6_18-1)  | [Live🚀](https://tushar0761.github.io/Cybercom/Practicle_6_18-1/)  | 18-01-2024 |
