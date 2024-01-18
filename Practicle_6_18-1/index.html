@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-light" onload="load()">
+    <h1>Cybercom Creation Form</h1>
+
+    <div class="full_form form-control">
+      <form action="./success.html">
+        <fieldset class="border">
+          <legend class="rounded bg-light text-center text-secondary">
+            Your Address
+          </legend>
+
+          <section class="Fname">
+            <span> first Name: </span>
+            <input
+              required
+              type="text"
+              name="fname"
+              class=" "
+              placeholder="e.g. Tushar"
+            />
+          </section>
+
+          <section id="Lname">
+            <span> last Name:-</span>
+            <input
+              required
+              type="text"
+              class="n3"
+              name="lname"
+              placeholder="e.g. Panchal"
+            />
+          </section>
+          <section id="street">
+            <span>Street: </span>
+
+            <input
+              required
+              type="text"
+              class="n3"
+              name="lname"
+              placeholder="Eg. Vastral Road"
+            />
+          </section>
+          <section id="city">
+            <span> City:</span>
+            <input
+              required
+              type="text"
+              class="n3"
+              name="lname"
+              placeholder="Eg. Ahmedabad"
+            />
+          </section>
+        </fieldset>
+
+        <fieldset class="border">
+          <legend class="rounded bg-light text-center text-secondary">
+            Additional details
+          </legend>
+          <section id="biography">
+            <span> biography: </span>
+            <textarea
+              name="address"
+              id="address"
+              cols="30"
+              placeholder="Your Address"
+              rows="4"
+            ></textarea>
+          </section>
+          <section id="image">
+            <span> Image </span> <input type="file" name="image" id="image" />
+          </section>
+          <section id="age">
+            <span> Age group</span>
+            <select name="age" id="ageg">
+              <option value="0">0 to 9 Years</option>
+              <option value="1">10 to 19 Years</option>
+              <option value="2">20 to 29 Years</option>
+              <option value="3">30 to 39 Years</option>
+              <option value="4">40 to 49 Years</option>
+              <option value="5">50 to 59 Years</option>
+              <option value="6">59 and above</option>
+            </select>
+          </section>
+        </fieldset>
+
+        <fieldset class="border">
+          <legend class="rounded bg-light text-center text-secondary">
+            interests
+          </legend>
+          <section id="biography" class="cols-12">
+            <span>Hobbies</span>
+            <textarea name="Hobbies" id="Hobbies" cols="10" rows="5"></textarea>
+          </section>
+
+          <section id="car">
+            <span> Favourite car </span>
+            <select name="ct" id="ct">
+              <option value="1">Volvo</option>
+              <option value="1">BMW</option>
+              <option value="1">Audi</option>
+              <option value="1">Ford</option>
+            </select>
+          </section>
+
+          <section id="transport">
+            <span>Favourite Public transport </span>
+            <label> </label>
+            <select id="multiple-group-select">
+              <optgroup label="Ground">
+                <option value="1">Train</option>
+                <option value="2">Taxi</option>
+                <option value="3">Bus</option>
+              </optgroup>
+              <optgroup label="Air">
+                <option value="4">Airplane</option>
+              </optgroup>
+              <optgroup label="Water">
+                <option value="4">Boats</option>
+                <option value="5">Ships</option>
+              </optgroup>
+            </select>
+          </section>
+        </fieldset>
+
+        <div class="bt">
+          <input required type="submit" value="submit" />
+          <input required type="reset" value="reset" />
+        </div>
+      </form>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

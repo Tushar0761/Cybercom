@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>Nandan</title>
+    <style>
+      h1 {
+        background: red;
+        padding: 10px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Nandan Fabrication</h1>
+    <h3>Welcome to Nandan Fabrication</h3>
+    <hr />
+    <h3>Our Products</h3>
+    <ul>
+      <li>Sectional warping machine</li>
+      <li>Drum</li>
+    </ul>
+    <hr />
+    <input type="number" id="a" placeholder="number1" />
+    <input type="number" id="b" placeholder="number2" />
+    <button onclick="plus()">plus</button>
+    <p id="ans"></p>
+    <script>
+      function plus() {
+        let a = document.querySelector("#a").nodeValue;
+        document.querySelector("#ans").nodeValue = a;
+      }
+    </script>
+  </body>
+</html>
