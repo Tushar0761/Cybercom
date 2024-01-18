@@ -7,7 +7,7 @@ h1 {
 }
 .full_form {
   width: 75%;
-  margin: 0 auto;
+  margin: 0 auto 20px auto;
   text-transform: capitalize;
   padding: 10px;
 }
