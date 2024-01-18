@@ -2,7 +2,7 @@
 
 ### [Live Demo 🚀](https://tushar0761.github.io/Cybercom/Practicle_6_18-1/)
 
-** Create a HTML page as per below image **
+**Create a HTML page as per below image**
 
 ![Alt text](./sample.png)
 
