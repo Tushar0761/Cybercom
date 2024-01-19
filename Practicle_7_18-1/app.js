@@ -2,6 +2,9 @@ let email = document.querySelector("#email");
 let conemail = document.querySelector("#conemail");
 let psw = document.querySelector("#psw");
 let conpsw = document.querySelector("#conpsw");
+
+let help = document.querySelector("#helpPass i");
+
 email.addEventListener("focusout", () => {
   emailvalidate();
   email.addEventListener("keyup", emailvalidate);
@@ -75,6 +78,15 @@ function addState() {
     stateSelect.add(opt);
   });
 }
+help.addEventListener("click", () => {
+  let box = document.querySelector("#hidden");
+  if (box.hidden) {
+    box.hidden = false;
+    setTimeout(() => {
+      box.hidden = true;
+    }, 3000);
+  } else box.hidden = true;
+});
 function emailcon() {
   if (conemail.value !== email.value) {
     document.querySelector("#conemailerr").textContent = "email didn't match";

@@ -29,3 +29,6 @@ fieldset > legend {
   font-size: 12px;
   font-weight: 500;
 }
+#hidden {
+  width: max-content;
+}
