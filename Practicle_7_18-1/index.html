@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-light" onload="load()">
+    <h1>Cybercom Creation Form</h1>
+
+    <div class="full_form form-control">
+      <form action="./Information.html">
+        <fieldset class="border">
+          <legend class="rounded bg-light text-center text-secondary">
+            Personal Information
+          </legend>
+
+          <section>
+            <span> first Name: </span>
+            <input
+              required
+              type="text"
+              name="fname"
+              class=" "
+              placeholder="e.g. Tushar"
+            />
+          </section>
+
+          <section id="Lname">
+            <span> last Name:-</span>
+            <input
+              required
+              type="text"
+              class="n3"
+              name="lname"
+              placeholder="e.g. Panchal"
+            />
+          </section>
+          <section id="dob">
+            <span>Date of birth</span>
+            <div class="col-6 d-flex">
+              <select class="form-select me-2" name="month" id="month">
+                <option selected>month</option>
+              </select>
+              <select name="Day" class="form-select ms-2 me-2" id="day">
+                <option selected>day</option>
+              </select>
+              <select name="year" class="form-select ms-2 me-2" id="year">
+                <option selected>year</option>
+              </select>
+            </div>
+          </section>
+          <section id="gender">
+            <span>Gender</span>
+            <div class="d-flex">
+              <div class="male d-flex ms-2 me-2">
+                <input
+                  type="radio"
+                  class="form-check-input p-2 me-2"
+                  name="gender"
+                  id="male"
+                />Male
+              </div>
+              <div class="female d-flex ms-2 me-2">
+                <input
+                  type="radio"
+                  class="form-check-input p-2 me-2"
+                  name="gender"
+                  id="Female"
+                />Female
+              </div>
+              <div class="other d-flex ms-2 me-2">
+                <input
+                  type="radio"
+                  class="form-check-input p-2 me-2"
+                  name="gender"
+                  id="Other"
+                />Other
+              </div>
+            </div>
+          </section>
+        </fieldset>
+
+        <fieldset class="border">
+          <legend class="rounded bg-light text-center text-secondary">
+            account information
+          </legend>
+          <section id="emailsec">
+            <span>email</span>
+            <div class="col">
+              <input type="email" name="email" id="email" />
+              <div id="invalidemail" class="text-danger fw-bold"></div>
+            </div>
+          </section>
+          <section id="confirmemail">
+            <span>re-type email</span>
+            <div class="col">
+              <input type="email" name="conemail" id="conemail" />
+              <div class="text-danger fw-bold" id="conemailerr"></div>
+            </div>
+          </section>
+          <section id="pswsec d-flex ">
+            <span>password</span>
+            <div>
+              <div class="w-100">
+                <input
+                  type="password"
+                  class="form-control"
+                  name="psw"
+                  id="psw"
+                  placeholder=""
+                />
+                <div id="invalidpsw" class="text-danger fw-bold"></div>
+              </div>
+            </div>
+            <div id="helpPass" class="p-3">
+              <i class="fa fa-question-circle" aria-hidden="true"></i>
+            </div>
+            <div id="helpFloat"></div>
+          </section>
+          <section id="repsw">
+            <span>password</span>
+            <div class="col">
+              <input
+                type="password"
+                class="form-control"
+                name="repsw"
+                id="conpsw"
+                placeholder=""
+              />
+              <div class="text-danger fw-bold" id="pswerr"></div>
+            </div>
+          </section>
+          <section id="question">
+            <span>Security question</span>
+            <select class="form-select" name="" id="que">
+              <option selected>Choose a security Question</option>
+              <option value="">Where do you live ?</option>
+              <option value="">What do you like the most ?</option>
+              <option value="">Which is your favourite movie ?</option>
+            </select>
+          </section>
+          <section id="anssec">
+            <span>Security Answer</span>
+            <input
+              type="text"
+              class="form-control"
+              name=""
+              id="ans"
+              aria-describedby="helpId"
+              placeholder=""
+            />
+          </section>
+        </fieldset>
+
+        <fieldset class="border">
+          <legend class="rounded bg-light text-center text-secondary">
+            contact information
+          </legend>
+          <section id="address" class="cols-12">
+            <span>address</span>
+            <textarea
+              class="form-control"
+              name="add"
+              id="add"
+              rows="3"
+            ></textarea>
+          </section>
+
+          <section id="city">
+            <span>city</span>
+            <input
+              type="text"
+              class="form-control"
+              name="city"
+              id="city "
+              aria-describedby="helpId"
+              placeholder=""
+            />
+          </section>
+
+          <section id="statesec">
+            <span>state</span>
+            <select class="form-select" name="state" id="state">
+              <option selected>Choose a state</option>
+            </select>
+          </section>
+          <section id="zip">
+            <span>Zip code</span>
+            <input
+              type="number"
+              class="form-control"
+              name="zip"
+              id="zip"
+              aria-describedby="helpId"
+              placeholder=""
+              maxlength="6"
+              minlength="6"
+            />
+          </section>
+          <section id="mobile">
+            <span>phone</span>
+            <div class="d-flex">
+              <input
+                type="number"
+                class="form-control"
+                name="number"
+                id="number"
+                aria-describedby="helpId"
+                placeholder=""
+              />
+              <div
+                id="help"
+                class="p-3 d-flex justify-content-center align-items-center"
+              >
+                <i class="fa fa-question-circle" aria-hidden="true"></i>
+              </div>
+              <select class="form-select" name="mo" id="mo">
+                <option selected>Select one</option>
+                <option value="india">India +91</option>
+                <option value="india">USA +1</option>
+              </select>
+            </div>
+          </section>
+        </fieldset>
+
+        <div class="bt d-flex justify-content-center">
+          <input
+            required
+            type="submit"
+            value="submit"
+            class="btn btn-primary w-25 m-3"
+          />
+          <input
+            required
+            type="reset"
+            value="reset"
+            class="btn btn-dark w-25 m-3"
+          />
+        </div>
+      </form>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
