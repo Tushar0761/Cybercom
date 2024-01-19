@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Information Page</title>
+  </head>
+  <body>
+    <h1>Infromation Page</h1>
+    <table border="1px">
+      <thead>
+        <tr>
+          <th>First-Name</th>
+          <th>Last-Name</th>
+          <th>DOB</th>
+          <th>Gender</th>
+          <th>Email</th>
+          <th>Password</th>
+          <th>Security Question</th>
+          <th>Answer</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Zip Code</th>
+          <th>Phone</th>
+          <th>Mobile</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="fname">abc</td>
+          <td id="lname">xyz</td>
+          <td id="dob">19-january-2000</td>
+          <td id="gender">Male</td>
+          <td id="email">tus@gmail.com</td>
+          <td id="password">Ab123456</td>
+          <td id="que">Where do you live ?</td>
+          <td id="ans">Ahmedabad</td>
+          <td id="add">152 Baker's Street, Nikol</td>
+          <td id="city">Ahmedabad</td>
+          <td id="state">Gujarat</td>
+          <td id="zip">382350</td>
+          <td id="number">9999999999</td>
+          <td id="mo">India +91</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script>
+      const firstName = document.getElementById("fname");
+      const lastName = document.getElementById("lname");
+      const dob = document.getElementById("dob");
+      const gender = document.getElementById("gender");
+      const email = document.getElementById("email");
+      const password = document.getElementById("password");
+      const question = document.getElementById("que");
+      const answer = document.getElementById("ans");
+      const address = document.getElementById("add");
+      const city = document.getElementById("city");
+      const state = document.getElementById("state");
+      const zip = document.getElementById("zip");
+      const number = document.getElementById("number");
+      const mo = document.getElementById("mo");
+
+      firstName.innerText = sessionStorage.getItem("first-name")
+      lastName.innerText = sessionStorage.getItem("last-name")
+      dob.innerText = sessionStorage.getItem("dob")
+      gender.innerText = sessionStorage.getItem("gender")
+      email.innerText = sessionStorage.getItem("confirm-email")
+      password.innerText = sessionStorage.getItem("confirm-password")
+      question.innerText = sessionStorage.getItem("question")
+      answer.innerText = sessionStorage.getItem("answer")
+      address.innerText = sessionStorage.getItem("address")
+      city.innerText = sessionStorage.getItem("city")
+      state.innerText = sessionStorage.getItem("state")
+      zip.innerText = sessionStorage.getItem("zip")
+      number.innerText = sessionStorage.getItem("number")
+      mo.innerText = sessionStorage.getItem("mobile")
+
+    </script>
+  </body>
+</html>

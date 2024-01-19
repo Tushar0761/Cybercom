@@ -78,15 +78,6 @@ function addState() {
     stateSelect.add(opt);
   });
 }
-help.addEventListener("click", () => {
-  let box = document.querySelector("#hidden");
-  if (box.hidden) {
-    box.hidden = false;
-    setTimeout(() => {
-      box.hidden = true;
-    }, 3000);
-  } else box.hidden = true;
-});
 function emailcon() {
   if (conemail.value !== email.value) {
     document.querySelector("#conemailerr").textContent = "email didn't match";
@@ -175,3 +166,65 @@ function addClass() {
     em.classList.add("form-control");
   });
 }
+
+const form = document.getElementById("form");
+const firstName = document.getElementById("fname");
+const lastName = document.getElementById("lname");
+const day = document.getElementById("day");
+const month = document.getElementById("month");
+const year = document.getElementById("year");
+
+const genders = document.getElementsByName("gender");
+let gender_value;
+
+const question = document.getElementById("que");
+const answer = document.getElementById("ans");
+const address = document.getElementById("add");
+const city = document.getElementById("city");
+const state = document.getElementById("state");
+const zip = document.getElementById("zip");
+const number = document.getElementById("number");
+const mo = document.getElementById("mo");
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const dob = `${day.value}-${month.value}-${year.value}`;
+
+  genders.forEach((gender) => {
+    if (gender.checked) {
+      gender_value = gender.value;
+      if (gender.value == "on") {
+        gender_value = gender.getAttribute("id");
+      }
+    }
+  });
+
+  sessionStorage.setItem("first-name", firstName.value);
+  sessionStorage.setItem("last-name", lastName.value);
+  sessionStorage.setItem("dob", dob);
+  sessionStorage.setItem("gender", gender_value);
+  // sessionStorage.setItem("email",email.value);
+  sessionStorage.setItem("confirm-email", conemail.value);
+  // sessionStorage.setItem("password",psw.value);
+  sessionStorage.setItem("confirm-password", conpsw.value);
+  sessionStorage.setItem("question", question.value);
+  sessionStorage.setItem("answer", answer.value);
+  sessionStorage.setItem("address", address.value);
+  sessionStorage.setItem("city", city.value);
+  sessionStorage.setItem("state", state.value);
+  sessionStorage.setItem("zip", zip.value);
+  sessionStorage.setItem("number", number.value);
+  sessionStorage.setItem("mobile", mo.value);
+
+  window.location.href = "Information.html";
+});
+
+help.addEventListener("click", () => {
+  let box = document.querySelector("#hidden");
+  if (box.hidden) {
+    box.hidden = false;
+    setTimeout(() => {
+      box.hidden = true;
+    }, 3000);
+  } else box.hidden = true;
+});

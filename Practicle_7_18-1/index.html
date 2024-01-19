@@ -22,7 +22,7 @@
     <h1>Cybercom Creation Form</h1>
 
     <div class="full_form form-control">
-      <form action="./Information.html">
+      <form id="form" action="./Information.html">
         <fieldset class="border">
           <legend class="rounded bg-light text-center text-secondary">
             Personal Information
@@ -31,6 +31,7 @@
           <section>
             <span> first Name: </span>
             <input
+              id="fname"
               required
               type="text"
               name="fname"
@@ -42,6 +43,7 @@
           <section id="Lname">
             <span> last Name:-</span>
             <input
+              id="lname"
               required
               type="text"
               class="n3"
@@ -141,10 +143,9 @@
                 </ul>
               </div>
             </div>
-            <div id="helpFloat"></div>
           </section>
           <section id="repsw">
-            <span>password</span>
+            <span>Re-type password</span>
             <div class="col">
               <input
                 type="password"
@@ -160,9 +161,13 @@
             <span>Security question</span>
             <select class="form-select" name="" id="que">
               <option selected>Choose a security Question</option>
-              <option value="">Where do you live ?</option>
-              <option value="">What do you like the most ?</option>
-              <option value="">Which is your favourite movie ?</option>
+              <option value="Where do you live ?">Where do you live ?</option>
+              <option value="What do you like the most ?">
+                What do you like the most ?
+              </option>
+              <option value="Which is your favourite movie ?">
+                Which is your favourite movie ?
+              </option>
             </select>
           </section>
           <section id="anssec">
@@ -192,13 +197,13 @@
             ></textarea>
           </section>
 
-          <section id="city">
+          <section id="city-sec">
             <span>city</span>
             <input
               type="text"
               class="form-control"
               name="city"
-              id="city "
+              id="city"
               aria-describedby="helpId"
               placeholder=""
             />
@@ -210,7 +215,7 @@
               <option selected>Choose a state</option>
             </select>
           </section>
-          <section id="zip">
+          <section id="zipCode">
             <span>Zip code</span>
             <input
               type="number"
@@ -242,8 +247,8 @@
               </div>
               <select class="form-select" name="mo" id="mo">
                 <option selected>Select one</option>
-                <option value="india">India +91</option>
-                <option value="india">USA +1</option>
+                <option value="India +91">India +91</option>
+                <option value="USA +1">USA +1</option>
               </select>
             </div>
           </section>
