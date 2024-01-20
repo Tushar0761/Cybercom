@@ -1,4 +1,4 @@
-# Practicle 6 - 18 Jan
+# Practicle 7 - 19 Jan
 
 ### [Live Demo 🚀](https://tushar0761.github.io/Cybercom/Practicle_7_18-1/)
 
