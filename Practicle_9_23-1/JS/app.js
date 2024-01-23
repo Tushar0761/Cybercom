@@ -15,24 +15,24 @@ $("form").on("submit", function (event) {
 
 function validateForm() {
   if (!validateString($("#txtFirstName").val())) {
-    $("#txtFirstName").focus();
     alert("First Name is not valid.");
+    $("#txtFirstName").focus();
     return false;
   } else if (!validateString($("#txtLastName").val())) {
-    $("#txtLastName").focus();
     alert("Last Name is not valid.");
+    $("#txtLastName").focus();
     return false;
   } else if (!validateHeight()) {
-    $("#numPatientHeight").focus();
     alert("Height is not valid.");
+    $("#numPatientHeight").focus();
     return false;
   } else if (!validateWeight()) {
-    $("#numPatientWeight").focus();
     alert("Weight is not valid.");
+    $("#numPatientWeight").focus();
     return false;
   } else if (!validateEmail()) {
-    $("#emailPatient").focus();
     alert("Email is not valid.");
+    $("#emailPatient").focus();
     return false;
   } else if (!validateSelect()) {
     return false;
