@@ -1,0 +1,27 @@
+* {
+  text-transform: capitalize;
+}
+body {
+  margin: 0;
+}
+p {
+  margin: 0 !important;
+}
+main {
+  min-width: 500px;
+  max-width: 50%;
+  margin: 20px auto 30px;
+}
+h2 {
+  padding: 20px;
+}
+section {
+  margin: 10px 40px;
+  padding: 5px 10px;
+}
+section > p {
+  font-weight: 500;
+}
+span {
+  color: red;
+}

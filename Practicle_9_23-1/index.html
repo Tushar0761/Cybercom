@@ -1,0 +1,380 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patient Form</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-light">
+    <main class="bg-white shadow">
+      <h2>General Patient Information</h2>
+      <form action="#" id="myForm">
+        <section id="gender">
+          <p>Patient Gender <span>*</span></p>
+          <div class="input">
+            <select name="slGender" class="w-50" id="slGender" required>
+              <option selected value="">Select one</option>
+            </select>
+          </div>
+        </section>
+        <section id="patientName">
+          <p>Patient Name <span>*</span></p>
+          <div class="input row">
+            <div id="firstName" class="col-6">
+              <input
+                type="text"
+                class="form-control"
+                name="txtFirstName"
+                id="txtFirstName"
+                placeholder="First Name"
+                required
+              />
+              <p>first name</p>
+            </div>
+            <div id="lastName" class="col-6">
+              <input
+                type="text"
+                class="form-control"
+                name="txtLastName"
+                id="txtLastName"
+                required
+                placeholder="Last Name"
+              />
+              <p>last name</p>
+            </div>
+          </div>
+          <div id="name-error-msg" class="error-msg">abc</div>
+        </section>
+        <section id="dateOfBirth">
+          <p>Date of birth <span>*</span></p>
+          <div class="input row">
+            <select name="slMonth" id="slMonth" class="col-4" required>
+              <option value="" selected>month</option>
+            </select>
+            <select name="slDay" id="slDay" class="col-4" required>
+              <option selected value="">day</option>
+            </select>
+            <select name="slYear" id="slYear" class="col-4" required>
+              <option selected value="">year</option>
+            </select>
+          </div>
+        </section>
+        <section id="height">
+          <p>Patient Height (cm's)<span>*</span></p>
+          <div class="input">
+            <input
+              type="number"
+              class="form-control"
+              name="numPatientHeight"
+              id="numPatientHeight"
+              placeholder="ex: 150"
+              required
+            />
+          </div>
+          <div id="height-error-msg" class="error-msg">abc</div>
+        </section>
+        <section id="weight">
+          <p>Patient weight (kg's)<span>*</span></p>
+          <div class="input">
+            <input
+              type="number"
+              class="form-control"
+              name="numPatientWeight"
+              id="numPatientWeight"
+              required
+              placeholder="ex: 70"
+            />
+          </div>
+          <div id="weight-error-msg" class="error-msg"></div>
+        </section>
+
+        <section id="email">
+          <p>Patient Email <span>*</span></p>
+          <div class="input">
+            <input
+              type="email"
+              class="form-control"
+              name="emailPatient"
+              id="emailPatient"
+              placeholder="abc@mail.com"
+              required
+            />
+            <div id="email-error-msg" class="error-msg">abc</div>
+          </div>
+        </section>
+        <section id="reason">
+          <p>Reason for seeing the doctor <span>*</span></p>
+          <div class="input">
+            <input
+              type="text"
+              class="form-control"
+              name="txtReason"
+              id="txtReason"
+              placeholder="Reason"
+              required
+            />
+          </div>
+        </section>
+        <h2>Patient Medical History</h2>
+        <section id="drugs">
+          <p>Please list any drug allergies</p>
+          <div class="input">
+            <textarea
+              class="form-control"
+              name="txtDrugs"
+              id="txtDrugs"
+              rows="3"
+            ></textarea>
+          </div>
+        </section>
+        <section id="pastDiseases">
+          <p>Have you ever had (Please check all that apply)</p>
+
+          <div class="input" id="diseasesList"></div>
+        </section>
+        <section id="illnesses">
+          <p>Other illnesses:</p>
+          <div class="input">
+            <input
+              type="text"
+              class="form-control"
+              name="txtIllness"
+              id="txtIllness"
+            />
+          </div>
+        </section>
+        <section id="opration">
+          <p>Please list any Operations and Dates of Each</p>
+          <div class="input">
+            <textarea
+              class="form-control"
+              name="txtOperations"
+              id="txtOperations"
+              rows="3"
+            ></textarea>
+          </div>
+        </section>
+        <section id="drugs">
+          <p>Please list your Current Medications</p>
+          <div class="input">
+            <textarea
+              class="form-control"
+              name="txtMedication"
+              id="txtMedication"
+              rows="3"
+            ></textarea>
+          </div>
+        </section>
+
+        <h2>Healthy & Unhealthy Habits</h2>
+        <section id="exercise">
+          <p>Exercise</p>
+          <div class="input" id="exerciseOption">
+            <div class="exerciseItem">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="exercise"
+                value="never"
+                checked
+              />Never
+            </div>
+            <div class="exerciseItem">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="exercise"
+                value="1-2 days"
+              />1-2 days
+            </div>
+            <div class="exerciseItem">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="exercise"
+                value="3-4 days"
+              />3-4 days
+            </div>
+            <div class="exerciseItem">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="exercise"
+                value="5+ days"
+              />5+ days
+            </div>
+          </div>
+        </section>
+
+        <section id="diet">
+          <p>Eating following a diet</p>
+          <div class="input" id="dietOption">
+            <div class="dietItem">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="diet"
+                value="loose"
+              />I have loose diet
+            </div>
+            <div class="dietItem">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="diet"
+                value="strict"
+              />I have strict diet
+            </div>
+            <div class="dietItem">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="diet"
+                value="no diet plan"
+                checked
+              />I dont have diet plan
+            </div>
+          </div>
+        </section>
+        <section id="Alcohol">
+          <p>Alcohol Consumption</p>
+          <div class="input" id="alcoholOption">
+            <div class="alcoholItem">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="alcohol"
+                value="never"
+                checked
+              />I don't drink
+            </div>
+            <div class="alcoholItem">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="alcohol"
+                value="1-2 glasses per day"
+              />1-2 glasses/day
+            </div>
+            <div class="alcoholItem">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="alcohol"
+                value="3-4 glasses per day"
+              />3-4 glasses/day
+            </div>
+            <div class="alcoholItem">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="alcohol"
+                value="5+ glasses per day"
+              />5+ glasses/day
+            </div>
+          </div>
+        </section>
+        <section id="caffeine">
+          <p>caffeine Consumption</p>
+          <div class="input" id="caffeineOption">
+            <div class="caffeineItem">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="caffeine"
+                value="never"
+                checked
+              />I don't use Caffeine
+            </div>
+            <div class="caffeineItem">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="caffeine"
+                value="1-2 cups per day"
+              />1-2 cups/day
+            </div>
+            <div class="caffeineItem">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="caffeine"
+                value="3-4 cups per day"
+              />3-4 cups/day
+            </div>
+            <div class="caffeineItem">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="caffeine"
+                value="5+ cups per day"
+              />5+ cups/day
+            </div>
+          </div>
+        </section>
+        <section id="smoke">
+          <p>smoke Consumption</p>
+          <div class="input" id="smokeOption">
+            <div class="smokeItem">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="smoke"
+                value="never"
+                checked
+              />No
+            </div>
+            <div class="smokeItem">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="smoke"
+                value="1-2 packs per day"
+              />1-2 packs/day
+            </div>
+            <div class="smokeItem">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="smoke"
+                value="3-4 packs per day"
+              />3-4 packs/day
+            </div>
+            <div class="smokeItem">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="smoke"
+                value="5+
+              packs per day"
+              />5+ packs/day
+            </div>
+          </div>
+        </section>
+        <section id="medicalHistroy">
+          <p>Include other comments regarding your Medical History</p>
+          <div class="input">
+            <textarea
+              class="form-control"
+              name="txtMedicalHistroy"
+              id="txtMedicalHistroy"
+              rows="3"
+            ></textarea>
+          </div>
+        </section>
+        <hr />
+        <div class="pb-3 d-flex justify-content-center align-items-center">
+          <button id="submitBtn" class="btn w-25 btn-primary">submit</button>
+        </div>
+      </form>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="./JS/classes.js"></script>
+    <script src="./JS/validationFunctions.js"></script>
+    <script src="./JS/app.js"></script>
+  </body>
+</html>
