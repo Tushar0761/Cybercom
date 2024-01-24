@@ -1,8 +1,13 @@
 * {
   text-transform: capitalize;
 }
-body {
+html {
   margin: 0;
+}
+body {
+  background: url(./Images/bg.jpg);
+  background-attachment: fixed;
+  background-size: cover;
 }
 p {
   margin: 0 !important;

@@ -3,7 +3,8 @@ $(document).ready(() => {
   addOptions();
 });
 $("#submitBtn").click(function () {
-  if (validateForm()) {
+  let bool = validateForm();
+  if (bool) {
     $("form").submit();
   }
 });
@@ -14,28 +15,54 @@ $("form").on("submit", function (event) {
 });
 
 function validateForm() {
+  let errors = [];
+  let bool = true;
   if (!validateString($("#txtFirstName").val())) {
-    alert("First Name is not valid.");
+    errors.push("First Name");
+    bool = false;
     $("#txtFirstName").focus();
-    return false;
-  } else if (!validateString($("#txtLastName").val())) {
-    alert("Last Name is not valid.");
-    $("#txtLastName").focus();
-    return false;
-  } else if (!validateHeight()) {
-    alert("Height is not valid.");
-    $("#numPatientHeight").focus();
-    return false;
-  } else if (!validateWeight()) {
-    alert("Weight is not valid.");
-    $("#numPatientWeight").focus();
-    return false;
-  } else if (!validateEmail()) {
-    alert("Email is not valid.");
-    $("#emailPatient").focus();
-    return false;
-  } else if (!validateSelect()) {
-    return false;
   }
-  return true;
+  if (!validateString($("#txtLastName").val())) {
+    errors.push("Last Name");
+    $("#txtLastName").focus();
+    bool = false;
+  }
+  if (!validateHeight()) {
+    errors.push("Height");
+    $("#numPatientHeight").focus();
+    bool = false;
+  }
+  if (!validateWeight()) {
+    errors.push("Weight");
+    $("#numPatientWeight").focus();
+    bool = false;
+  }
+  if (!validateEmail()) {
+    errors.push("Email");
+    $("#emailPatient").focus();
+    bool = false;
+  }
+
+  if (!validateDOB()) {
+    errors.push("Date of Birth");
+    $("#slMonth").focus();
+    bool = false;
+  }
+  if (!validateGender()) {
+    errors.push("Gender");
+    $("#slGender").focus();
+    bool = false;
+  }
+  if (!validateReason()) {
+    errors.push("Reason");
+    $("#txtReason").focus();
+    bool = false;
+  }
+  if (!bool) {
+    console.log("bool", errors);
+    let str = errors.join(", ");
+    alert(`Please Provide Valid Input (${str})`);
+  }
+  console.log("bool from validate drom", bool);
+  return bool;
 }

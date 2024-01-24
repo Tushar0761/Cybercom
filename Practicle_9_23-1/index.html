@@ -9,8 +9,8 @@
       rel="stylesheet"
     />
   </head>
-  <body class="bg-light">
-    <main class="bg-white shadow">
+  <body>
+    <main class="shadow bg-light">
       <h2>General Patient Information</h2>
       <form action="#" id="myForm">
         <section id="gender">
@@ -20,6 +20,7 @@
               <option selected value="">Select one</option>
             </select>
           </div>
+          <div id="gender-error-msg" class="error-msg"></div>
         </section>
         <section id="patientName">
           <p>Patient Name <span>*</span></p>
@@ -47,7 +48,7 @@
               <p>last name</p>
             </div>
           </div>
-          <div id="name-error-msg" class="error-msg">abc</div>
+          <div id="name-error-msg" class="error-msg"></div>
         </section>
         <section id="dateOfBirth">
           <p>Date of birth <span>*</span></p>
@@ -75,7 +76,7 @@
               required
             />
           </div>
-          <div id="height-error-msg" class="error-msg">abc</div>
+          <div id="height-error-msg" class="error-msg"></div>
         </section>
         <section id="weight">
           <p>Patient weight (kg's)<span>*</span></p>
@@ -103,7 +104,7 @@
               placeholder="abc@mail.com"
               required
             />
-            <div id="email-error-msg" class="error-msg">abc</div>
+            <div id="email-error-msg" class="error-msg"></div>
           </div>
         </section>
         <section id="reason">
@@ -118,6 +119,7 @@
               required
             />
           </div>
+          <div id="reason-error-msg" class="error-msg"></div>
         </section>
         <h2>Patient Medical History</h2>
         <section id="drugs">
@@ -368,7 +370,7 @@
         </section>
         <hr />
         <div class="pb-3 d-flex justify-content-center align-items-center">
-          <button id="submitBtn" class="btn w-25 btn-primary">submit</button>
+          <button id="submitBtn" class="btn w-25 btn-primary">Submit</button>
         </div>
       </form>
     </main>

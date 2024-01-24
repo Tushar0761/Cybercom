@@ -6,7 +6,7 @@ function addBootstrapClasses() {
     "mt-1"
   );
   $("h2").addClass("fs-3 border-bottom border-2");
-  $(".error-msg").addClass("text-danger fw-normal").hide();
+  $(".error-msg").addClass("text-danger");
 }
 
 function addOptions() {

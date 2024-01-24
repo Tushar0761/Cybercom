@@ -1,30 +1,53 @@
-$("#txtFirstName , #txtFirstName").blur(validateName);
+$("#txtFirstName ").blur(validateName);
+$("#txtLastName ").blur(validateName);
 $("#emailPatient").blur(validateEmail);
 $("#numPatientHeight").blur(validateHeight);
 $("#numPatientWeight").blur(validateWeight);
+$("#slDay , #slYear , #slMonth").blur(validateDOB);
+$("#slGender").blur(validateGender);
+$("#txtReason").blur(validateReason);
 
-function validateSelect() {
+function validateGender() {
+  let bool = true;
+  let genderInput = $("#slGender");
+  if (genderInput.val() == "") {
+    bool = false;
+    $("#slGender").addClass("border-danger");
+    $("#gender-error-msg").slideDown(400).text("This field is required.");
+  } else {
+    $("#slGender").removeClass("border-danger");
+    $("#gender-error-msg").slideUp(400).text("");
+  }
+  return bool;
+}
+function validateDOB() {
+  let bool = true;
   if ($("#slDay").val() == "") {
-    alert("Please Provide Valid DOB");
-    $("#slDay").focus();
-    return false;
+    bool = false;
   } else if ($("#slYear").val() == "") {
-    $("#slYear").focus();
-    alert("Please Provide Valid DOB");
-    return false;
+    bool = false;
   } else if ($("#slMonth").val() == "") {
-    alert("Please Provide Valid DOB");
-    $("#slMonth").focus();
-    return false;
-  } else if ($("#slGender").val() == "") {
-    alert("Please Provide Gender");
-    $("#slGender").focus();
-    return false;
-  } else if ($("#txtReason").val() == "") {
-    alert("Please Provide Reason");
-    $("#txtReason").focus();
-    return false;
-  } else return true;
+    bool = false;
+  }
+  if (!bool) {
+    $("#slDay , #slYear , #slMonth").addClass("border-danger");
+  } else {
+    $("#slDay , #slYear , #slMonth").removeClass("border-danger");
+  }
+  return bool;
+}
+function validateReason() {
+  let bool = true;
+
+  if ($("#txtReason").val() == "") {
+    bool = false;
+    $("#reason-error-msg").slideDown(400).text("This field is required.");
+    $("#txtReason").addClass("border-danger");
+  } else {
+    $("#txtReason").removeClass("border-danger");
+    $("#reason-error-msg").slideUp(400).text("");
+  }
+  return bool;
 }
 
 function validateString(str) {
@@ -34,61 +57,82 @@ function validateString(str) {
 
 function validateName() {
   if (!validateString($(this).val())) {
+    $(this).addClass("border-danger");
     $("#name-error-msg").slideDown(400).text("Name is invalid");
   } else {
+    $(this).removeClass("border-danger");
+
     $("#name-error-msg").slideUp(400);
   }
 }
 
 function validateHeight() {
-  if ($("#numPatientHeight").val() > 250) {
-    $("#height-error-msg")
+  let heightInput = $("#numPatientHeight");
+  let errorBox = $("#height-error-msg");
+  if (heightInput.val() > 250) {
+    heightInput.addClass("border-danger");
+
+    errorBox
       .slideDown(400)
       .text("Height is too much. please provide right height");
+    $("numPatientHeight");
     return false;
-  } else if ($("#numPatientHeight").val() < 0) {
-    $("#height-error-msg").slideDown(400).text("Height can not be negative");
+  } else if (heightInput.val() < 0) {
+    heightInput.addClass("border-danger");
+    errorBox.slideDown(400).text("Height can not be negative");
     return false;
-  } else if ($("#numPatientHeight").val() == "") {
-    $("#height-error-msg").slideDown(400).text("This field is required");
+  } else if (heightInput.val() == "") {
+    heightInput.addClass("border-danger");
+    errorBox.slideDown(400).text("This field is required");
     return false;
   } else {
-    $("#height-error-msg").slideUp(400);
+    heightInput.removeClass("border-danger");
+    errorBox.slideUp(400);
     return true;
   }
 }
 
 function validateWeight() {
-  if ($("#numPatientWeight").val() > 250) {
-    $("#weight-error-msg")
+  let weightInput = $("#numPatientWeight");
+  let errorMSG = $("#weight-error-msg");
+  if (weightInput.val() > 250) {
+    errorMSG
       .slideDown(400)
       .text("weight is too much. please provide right weight");
+    weightInput.addClass("border-danger");
     return false;
-  } else if ($("#numPatientWeight").val() < 0) {
-    console.log("else if ");
-    $("#weight-error-msg").slideDown(400).text("Wight cannot be Negative");
+  } else if (weightInput.val() < 0) {
+    weightInput.addClass("border-danger");
+    errorMSG.slideDown(400).text("Wight cannot be Negative");
     return false;
-  } else if ($("#numPatientWeight").val() == "") {
-    $("#weight-error-msg").slideDown(400).text("This field is required");
+  } else if (weightInput.val() == "") {
+    weightInput.addClass("border-danger");
+    errorMSG.slideDown(400).text("This field is required");
     return false;
   } else {
-    $("#weight-error-msg").slideUp(400);
+    weightInput.removeClass("border-danger");
+    errorMSG.slideUp(400);
     return true;
   }
 }
 
 function validateEmail() {
   let regex = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
+  let emailInput = $("#emailPatient");
+  let errorMSG = $("#email-error-msg");
 
   let email = $("#emailPatient").val();
   if (email === "") {
-    $("#email-error-msg").slideDown(400).text("This field is required");
+    errorMSG.slideDown(400).text("This field is required");
+    emailInput.addClass("border-danger");
     return false;
   } else if (!regex.test(email)) {
-    $("#email-error-msg").slideDown(400).text("email id is not valid");
+    emailInput.addClass("border-danger");
+    errorMSG.slideDown(400).text("email id is not valid");
     return false;
   } else {
-    $("#email-error-msg").slideUp(400);
+    emailInput.removeClass("border-danger");
+    errorMSG.slideUp(400);
     return true;
   }
 }
