@@ -1,0 +1,60 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS Practice</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body class="bg-light">
+    <main class="text-center">
+      <div>
+        <span class="border-bottom fw-bold p-1 rounded"
+          >Height in Centimeters</span
+        >
+
+        <input
+          type="number"
+          name="height"
+          id="height"
+          class="form-control m-3"
+          placeholder="Height (in Cm)."
+        />
+
+        <span id="error-height" class="bg-danger p-2 rounded text-white"></span>
+      </div>
+
+      <div>
+        <span class="border-bottom fw-bold p-1 rounded"
+          >Weight in Kilogram</span
+        >
+
+        <input
+          type="number"
+          name="weight"
+          id="weight"
+          class="form-control m-3"
+          placeholder="Weight (in KG)."
+        />
+
+        <span id="error-weight" class="bg-danger p-2 rounded text-white"></span>
+      </div>
+
+      <div id="buttonDiv">
+        <button id="calcBMI" class="btn btn-primary w-50">Calculate BMI</button>
+      </div>
+    </main>
+
+    <div id="resultDiv" class="text-center fs-3 fw-bold">
+      <div id="bmiResult"></div>
+      <div id="bmiCatogary"></div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
