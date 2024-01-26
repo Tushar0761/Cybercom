@@ -16,11 +16,8 @@ function validateFields() {
 
   if (errors.length) {
     alert(`Please Provide Valid inputs. (${errors.join(", ")})`);
-    console.log("if", errors);
-
     return false;
   } else {
-    console.log("else", errors);
     return true;
   }
 }
