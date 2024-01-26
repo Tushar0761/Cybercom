@@ -2,16 +2,19 @@ $(document).ready(() => {
   addBootstrapClasses();
   addOptions();
 });
+
 $("#submitBtn").click(function () {
   let bool = validateForm();
   if (bool) {
     $("form").submit();
+  } else {
+    return false;
   }
 });
 
 $("form").on("submit", function (event) {
   event.preventDefault();
-  console.log($(this).serializeArray());
+  console.log("Form Submitted");
 });
 
 function validateForm() {
@@ -59,10 +62,8 @@ function validateForm() {
     bool = false;
   }
   if (!bool) {
-    console.log("bool", errors);
     let str = errors.join(", ");
     alert(`Please Provide Valid Input (${str})`);
   }
-  console.log("bool from validate drom", bool);
   return bool;
 }

@@ -39,6 +39,7 @@ function validateHeight() {
     return false;
   }
 
+  height.removeClass("border-danger");
   $("#error-height").fadeOut();
 
   return true;
@@ -65,6 +66,7 @@ function validateWeight() {
 
     return false;
   }
+  weight.removeClass("border-danger");
 
   $("#error-weight").fadeOut();
 
@@ -84,7 +86,7 @@ function validate(property) {
 }
 
 function calcBMI(Height, Weight) {
-  let bmi = (Weight * 10000) / Height ** 2;
+  let bmi = Weight / Height ** 2;
 
   return Number(bmi.toFixed(2));
 }
