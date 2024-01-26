@@ -40,10 +40,10 @@ function validateName() {
 
   if (!bool) {
     $("#name").addClass("border-danger");
-    $("#error-name").slideDown().text(msg);
+    $("#error-name").text(msg).slideDown();
   } else {
     $("#name").removeClass("border-danger");
-    $("#error-name").text("").hide();
+    $("#error-name").slideUp().text("");
   }
   return bool;
 }
@@ -60,11 +60,11 @@ function validateAddress() {
 
   if (!bool) {
     $("#address").addClass("border-danger");
-    $("#error-address").slideDown().text(msg);
+    $("#error-address").text(msg).slideDown();
     return false;
   } else {
     $("#address").removeClass("border-danger");
-    $("#error-address").text("").hide();
+    $("#error-address").slideUp().text("");
     return true;
   }
 }
@@ -75,11 +75,11 @@ function validateGender() {
 
   if (!str) {
     $("#gender").addClass("border-danger");
-    $("#error-gender").slideDown().text(msg);
+    $("#error-gender").text(msg).slideDown();
     return false;
   } else {
     $("#gender").removeClass("border-danger");
-    $("#error-gender").text("").hide();
+    $("#error-gender").slideUp().text("");
     return true;
   }
 }
@@ -98,10 +98,10 @@ function validateEmail() {
 
   if (!bool) {
     $("#email").addClass("border-danger");
-    $("#error-email").slideDown().text(msg);
+    $("#error-email").text(msg).slideDown();
   } else {
     $("#email").removeClass("border-danger");
-    $("#error-email").text("").hide();
+    $("#error-email").slideUp().text("");
   }
   return bool;
 }
