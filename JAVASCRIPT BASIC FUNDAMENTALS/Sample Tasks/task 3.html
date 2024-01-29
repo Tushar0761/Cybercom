@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Manipulation Practical Exam</title>
+    <style>
+      /* Provided CSS Styles for Reference */
+      .highlight {
+        background-color: yellow;
+      }
+
+      .new-element {
+        color: green;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sample HTML Content -->
+    <div id="container">
+      <h1>Welcome to DOM Manipulation Exam!</h1>
+      <p class="highlight">This paragraph has a highlight class.</p>
+      <ul>
+        <li>List Item 1</li>
+        <li>List Item 2</li>
+        <li>List Item 3</li>
+      </ul>
+      <div id="replaceMe">This content will be replaced.</div>
+    </div>
+
+    <!-- Your JavaScript Code Goes Here -->
+    <script>
+      // Task 3: Create a new paragraph element with the text "New Element Created!" and add it to the end of the body.
+      let pElement = document.createElement("p");
+      let TextNode = document.createTextNode("New Element Created!");
+      pElement.appendChild(TextNode);
+      document.getElementsByTagName("body")[0].appendChild(pElement);
+
+      // Task 4: Replace the content of the element with id "replaceMe" with the text "Content Replaced!".
+
+      // Task 5: Select the third list item (List Item 3) and change its text content to "Updated List Item".
+
+      // Task 6: Add a new class "new-element" to the newly created paragraph.
+
+      // Task 7: Remove the second list item from the unordered list.
+
+      // Task 8: Create a new attribute "data-info" with the value "DOM Exam" for the h1 element.
+
+      // Task 9: Change the font color of the h1 element to blue using the style property.
+
+      // Task 10: Create a button element with the text "Click Me!" and append it to the body. Add a click event listener to the button that alerts "Button Clicked!".
+    </script>
+  </body>
+</html>

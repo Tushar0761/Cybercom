@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Manipulation Practical Exam</title>
+    <style>
+      /* Provided CSS Styles for Reference */
+      .highlight {
+        background-color: yellow;
+      }
+
+      .new-element {
+        color: green;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sample HTML Content -->
+    <div id="container">
+      <h1>Welcome to DOM Manipulation Exam!</h1>
+      <p class="highlight">This paragraph has a highlight class.</p>
+      <ul>
+        <li>List Item 1</li>
+        <li>List Item 2</li>
+        <li>List Item 3</li>
+      </ul>
+      <div id="replaceMe">This content will be replaced.</div>
+    </div>
+
+    <!-- Your JavaScript Code Goes Here -->
+    <script>
+      // Task 4: Replace the content of the element with id "replaceMe" with the text "Content Replaced!".
+      document.getElementById("replaceMe").textContent = "Content Replaced!";
+    </script>
+  </body>
+</html>
