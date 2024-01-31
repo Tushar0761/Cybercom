@@ -8,13 +8,13 @@ function loadProducts() {
   let count = 1;
 
   ProductList.forEach((product) => {
-    let tr = ` <tr>
+    let tr = ` <tr id="${product.id}">
         <td>${count}</td>
         <td>${product.Name}</td>
         <td>${product.Price}</td>
         <td>${product.Category}</td>
         <td>${product.Description}</td>
-        <td>${addButton(count - 1)}</td>
+        <td>${addButton(product.id)}</td>
       </tr>
     `;
 
@@ -24,32 +24,24 @@ function loadProducts() {
   });
 }
 
-function addButton(count) {
+function addButton(id) {
   return `
-  <btn class="btn btn-success m-1" onclick="editProduct(${count})">Edit</btn>
-  <btn class="btn m-1 btn-danger" onclick="deleteProduct(${count})">Delete</btn>`;
+  <btn class="btn btn-success m-1" onclick="editProduct(${id})">Edit</btn>
+  <btn class="btn m-1 btn-danger" onclick="deleteProduct(${id})">Delete</btn>`;
 }
 
-function editProduct(count) {
+function editProduct(id) {
   $("#hidden").slideDown();
 
   let ProductList = JSON.parse(localStorage.getItem("ProductList"));
-
-  let product = ProductList[count];
-
   document.getElementById("saveBTN").addEventListener("click", function () {
-    if (!ProductList[count]) {
-      alert("This Product is no more present( Deleted in other window.)");
-      location.reload();
-    }
-
-    product.Name = $("#editedName").val() || product.Name;
-
-    product.Description = $("#editedDes").val() || product.Description;
-
-    product.Price = $("#editedPrice").val() || product.Price;
-
-    ProductList[count] = product;
+    ProductList.find((obj) => {
+      if (obj.id === id) {
+        obj.Name = $("#editedName").val() || obj.Name;
+        obj.Description = $("#editedDes").val() || obj.Description;
+        obj.Price = $("#editedPrice").val() || obj.Price;
+      }
+    });
 
     localStorage.setItem("ProductList", JSON.stringify(ProductList));
 
@@ -59,12 +51,20 @@ function editProduct(count) {
   });
 }
 
-function deleteProduct(count) {
+function deleteProduct(id) {
   let ProductList = JSON.parse(localStorage.getItem("ProductList"));
 
-  ProductList.splice(count, 1);
+  for (let i = 0; i < ProductList.length; i++) {
+    if (id === ProductList[i].id) {
+      if (confirm(`Are you sure to delete product ${ProductList[i].Name} ?`)) {
+        ProductList.splice(i, 1);
+      } else {
+        return;
+      }
+    }
+  }
 
   localStorage.setItem("ProductList", JSON.stringify(ProductList));
 
-  location.reload();
+  $(`#${id}`).remove();
 }

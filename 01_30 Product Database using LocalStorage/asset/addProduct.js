@@ -17,9 +17,10 @@ function addProduct() {
     $("#productDes , #productPrice, #productCategory , #productName").val("");
   }
 }
-
 function addToLocalStorage(name, price, des, category) {
+  let time = new Date();
   let product = {
+    id: time.getTime(),
     Name: name,
     Price: price,
     Description: des,
