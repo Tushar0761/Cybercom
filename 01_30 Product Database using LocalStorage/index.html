@@ -16,6 +16,7 @@
       <div class="d-flex">
         <div class="col-6 container">
           <p>Product Name</p>
+
           <input
             type="text"
             name="productName"
@@ -23,8 +24,10 @@
             class="form-control col-6"
             placeholder="Product Name"
           />
+
           <span id="name-error"></span>
         </div>
+
         <div class="col-6 container">
           <p>Product Price</p>
 
@@ -35,18 +38,22 @@
             placeholder="price"
             class="form-control col-6"
           />
+
           <span id="price-error"></span>
         </div>
       </div>
       <hr />
+
       <div class="container row">
         <p>Product Description</p>
+
         <textarea
           name="productDes"
           id="productDes"
           class="form-control mb-2"
         ></textarea>
         <hr />
+
         <p>Category</p>
         <select
           class="form-select col-6"
@@ -55,16 +62,19 @@
         >
           <option value="">Choose Category</option>
         </select>
+
         <span id="category-error"></span>
       </div>
+
       <button class="btn btn-primary m-2 p-2" onclick="addProduct()">
         Add
       </button>
     </main>
+
     <a href="./allProducts.html" class="link">
       <button class="btn btn-dark">Show All Products</button>
     </a>
+
     <script src="./asset/app.js"></script>
-    <script src="./asset/addClass.js"></script>
   </body>
 </html>
