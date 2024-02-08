@@ -5,6 +5,14 @@ const todoList = $("#todolist");
 
 const TASK_LIST = initialTASK_LIST();
 
+const PriorityValue = [
+  "no-priority",
+  "low-priority",
+  "medium-priority",
+  "high-priority",
+];
+const CategoryValue = ["Personal", "Work", "Coding", "Movies"];
+
 $(document).ready(showTaskTable);
 
 //event listener
@@ -12,28 +20,50 @@ todoButton.click(addBtnHandler);
 
 function addBtnHandler() {
   let task = todoInput.val();
-  let priority = $("#prioritySelect").val();
+  let priority = $("#prioritySelect");
+  let dueDate = $("#dueDate");
+  let categorySelect = $("#categorySelect");
 
   if (!task) {
     alert("Please Enter Something to Add in to do list");
     return;
   }
-  createTask(task, priority);
+  createTask(
+    task,
+    priority.val(),
+    dueDate.val(),
+    categorySelect.val(),
+    document.getElementById("dueDate").valueAsNumber
+  );
 
   todoInput.val("");
+  dueDate.val("");
 }
 
-$("#filterSelect").change(showTaskTable);
+$("#filterPrioritySelect ").change(showTaskTable);
 
-function createTask(task, priority) {
+$("#filterCategorySelect ").change(showTaskTable);
+
+function createTask(
+  task,
+  priorityValue,
+  dueDateValue,
+  categoryValue,
+  timestamp
+) {
   let time = new Date();
+
+  let dueDate = dueDateValue ? dueDateValue : "-";
 
   let toDoWork = {
     task: task,
-    priority: priority,
+    dueDate: dueDate,
+    priority: PriorityValue[priorityValue],
+    priorityIndex: PriorityValue.indexOf(PriorityValue[priorityValue]),
     createdTime: time.toString().split(" ").splice(1, 4).join(" "),
     updatedTime: "-",
-    category: "",
+    category: CategoryValue[categoryValue],
+    timeStamp: timestamp,
   };
 
   TASK_LIST.push(toDoWork);
@@ -66,30 +96,40 @@ function saveTaskList() {
 function showTaskTable() {
   if (!TASK_LIST.length) {
     $("#error").fadeIn("slow");
-    $("#taskTable , #filterBtnDiv").hide("fast");
+    $("#taskTable").hide("fast");
+    $("#filterDivs").hide("fast");
     return;
   }
 
   $("#error").fadeOut("fast");
-  $("#taskTable , #filterBtnDiv").fadeIn("fast");
+  $("#taskTable").fadeIn("fast");
+  $(" #filterDivs").fadeIn("fast");
 
   $("#taskTable tbody").html("");
 
   sortTaskList();
 
-  let currentFilter = $("#filterSelect").val();
+  let currentPriorityFilter = $("#filterPrioritySelect").val();
+  let currentCategoryFilter = $("#filterCategorySelect").val();
 
   TASK_LIST.forEach((Task, index) => {
-    if (currentFilter === "-1") {
-    } else if (currentFilter !== Task.priority) {
+    if (
+      (currentPriorityFilter !== "-1" &&
+        currentPriorityFilter !== Task.priority) ||
+      (currentCategoryFilter !== "-1" &&
+        currentCategoryFilter !== Task.category)
+    ) {
       return;
     }
 
     let [priorityInString, priorityClass] = getPriorityDetails(Task.priority);
 
     let tr = `<tr id="${index}" class="${priorityClass}">
-            <td>${index + 1}</td>
+            <td>${Task.category}</td>
+        
             <td id="task${index}">${Task.task}</td>
+           
+            <td>${Task.dueDate}</td>
             <td>${priorityInString}</td>
             <td>${Task.createdTime}</td>
             <td  id="updatedTime${index}">${Task.updatedTime}</td>
@@ -102,19 +142,23 @@ function showTaskTable() {
 
 function sortTaskList() {
   TASK_LIST.sort((b, a) => {
-    return a.priority - b.priority;
+    return a.priorityIndex - b.priorityIndex;
+  });
+
+  TASK_LIST.sort((a, b) => {
+    return a.timeStamp - b.timeStamp;
   });
 }
 
 function getPriorityDetails(priorityIndex) {
   switch (priorityIndex) {
-    case "1":
+    case "low-priority":
       return ["Low Priority", "table-success"];
       break;
-    case "2":
+    case "medium-priority":
       return ["Medium Priority", "table-warning"];
       break;
-    case "3":
+    case "high-priority":
       return ["High Priority", "table-danger"];
       break;
 
@@ -178,6 +222,8 @@ function updateRow(index) {
 
   let tr = `<td>${index + 1}</td>
             <td  id="task${index}">${Task.task}</td>
+            <td>${Task.dueDate}</td>
+
             <td>${priorityInString}</td>
             <td>${Task.createdTime}</td>
             <td   id="updatedTime${index}">${Task.updatedTime}</td>
