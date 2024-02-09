@@ -1,24 +1,8 @@
 body {
-  width: 100vw;
-  margin: 30px 0;
-}
-#todoitem {
-  max-width: 500px;
-}
-img {
-  height: 100px;
-  object-fit: cover;
-}
-#img {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: url(./bg.jpg);
+  padding: 30px;
 }
 
 #taskTable {
   max-width: calc(100vw - 15vw);
-}
-
-#dueDateSpan {
-  top: -20px;
 }
