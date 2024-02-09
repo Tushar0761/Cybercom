@@ -20,7 +20,7 @@
     <div id="inputDiv" class="d-flex flex-column justify-content-center">
       <!-- Task  -->
       <div class="d-flex justify-content-center">
-        <div class="col-6">
+        <div class="col-12 col-md-6">
           <input
             type="text"
             name="todoitem"
@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="d-flex justify-content-center m-2">
-        <div class="d-flex col-6">
+        <div class="d-flex col-12 col-md-6">
           <select
             class="form-select form-control me-2"
             name="priority"
@@ -67,7 +67,7 @@
           <input type="date" class="form-control" name="dueDate" id="dueDate" />
         </div>
         <button
-          class="btn btn-primary rounded col-4 col-lg-2 ms-2"
+          class="btn btn-primary rounded col-3 col-md-2 ms-2"
           id="todobutton"
         >
           Add
@@ -82,16 +82,47 @@
         </h3>
       </div>
 
-      <div class="d-flex justify-content-center align-items-center">
+      <div class="d-flex justify-content-center align-items-center flex-wrap">
+        <!-- Reset Button -->
+
         <button class="btn btn-warning p-3" onclick="resetFilter()">
           <i class="fa fa-refresh" aria-hidden="true"></i>
         </button>
 
+        <!-- Sort Div -->
+
+        <div
+          id="sortDiv"
+          class="m-3 p-2 col-8 col-md-3 d-flex rounded-4 align-items-center border bg-danger-subtle"
+        >
+          <span class="col-2 fw-bold">Sort</span>
+
+          <select
+            class="form-select form-control bg-success-subtle ms-2 me-2"
+            name="sortSelect"
+            id="sortSelect"
+          >
+            <option value="-1" selected>Default</option>
+
+            <option value="task">Task</option>
+            <option value="category">Category</option>
+            <option value="dueDate">Due Date</option>
+            <option value="priority">Priority</option>
+            <option value="createdTime">Created Time</option>
+            <option value="updatedTime">Updated Time</option>
+          </select>
+        </div>
+
+        <!-- Filter Div -->
+
         <div
           id="filterPriorityDiv"
-          class="m-3 p-2 col-lg-6 col-4 d-flex rounded-4 align-items-center border bg-dark-subtle"
+          class="m-3 p-2 col-12 col-md-6 d-flex rounded-4 align-items-center border bg-dark-subtle"
         >
-          <span class="col-1 fw-bold">Filter</span>
+          <span class="col-2 col-md-1 fw-bold">Filter</span>
+
+          <!-- Priority select -->
+
           <select
             class="form-select form-control bg-info-subtle ms-2 me-2"
             name="filterPriority"
@@ -109,6 +140,9 @@
               No Priority
             </option>
           </select>
+
+          <!-- Category select -->
+
           <select
             class="form-select form-control bg-primary-subtle ms-2 me-2"
             name="filterCategory"
@@ -121,65 +155,42 @@
             <option value="Movies">Movies</option>
           </select>
         </div>
-        <div
-          id="sortDiv"
-          class="m-3 p-2 col-lg-3 col-2 d-flex rounded-4 align-items-center border bg-danger-subtle"
-        >
-          <span class="col-2 fw-bold">Sort</span>
-          <select
-            class="form-select form-control bg-success-subtle ms-2 me-2"
-            name="sortSelect"
-            id="sortSelect"
-          >
-            <option value="-1" selected>Default</option>
-
-            <option value="task">Task</option>
-            <option value="category">Category</option>
-            <option value="dueDate">Due Date</option>
-            <option value="priority">Priority</option>
-            <option value="createdTime">Created Time</option>
-            <option value="updatedTime">Updated Time</option>
-          </select>
-        </div>
       </div>
+    </div>
 
-      <div
-        class="d-flex justify-content-center align-items-center"
-        id="tableDiv"
-      >
-        <table class="table table-hover table-bordered" id="taskTable">
-          <thead class="table table-dark text-center">
-            <tr>
-              <th onclick="sortTaskList(`category`)">
-                #
-                <i class="fa fa-sort" aria-hidden="true"></i>
-              </th>
-              <th class="col-3" onclick="sortTaskList(`task`)">
-                Task
-                <i class="fa fa-sort" aria-hidden="true"></i>
-              </th>
-              <th class="col-2" onclick="sortTaskList(`dueDate`)">
-                Due Date
-                <i class="fa fa-sort" aria-hidden="true"></i>
-              </th>
-              <th class="col-1" onclick="sortTaskList(`priority`)">
-                Priority
-                <i class="fa fa-sort" aria-hidden="true"></i>
-              </th>
-              <th class="col-2" onclick="sortTaskList(`createdTime`)">
-                Created Time
-                <i class="fa fa-sort" aria-hidden="true"></i>
-              </th>
-              <th class="col-1" onclick="sortTaskList(`updatedTime`)">
-                Modified Time
-                <i class="fa fa-sort" aria-hidden="true"></i>
-              </th>
-              <th class="col-2">Action</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
+    <div class="d-flex justify-content-center align-items-center" id="tableDiv">
+      <table class="table table-hover table-bordered" id="taskTable">
+        <thead class="table table-dark text-center">
+          <tr>
+            <th onclick="sortTaskList(`category`)">
+              #
+              <i class="fa fa-sort" aria-hidden="true"></i>
+            </th>
+            <th class="col-3" onclick="sortTaskList(`task`)">
+              Task
+              <i class="fa fa-sort" aria-hidden="true"></i>
+            </th>
+            <th class="col-2" onclick="sortTaskList(`dueDate`)">
+              Due Date
+              <i class="fa fa-sort" aria-hidden="true"></i>
+            </th>
+            <th class="col-1" onclick="sortTaskList(`priority`)">
+              Priority
+              <i class="fa fa-sort" aria-hidden="true"></i>
+            </th>
+            <th class="col-2" onclick="sortTaskList(`createdTime`)">
+              Created Time
+              <i class="fa fa-sort" aria-hidden="true"></i>
+            </th>
+            <th class="col-1" onclick="sortTaskList(`updatedTime`)">
+              Modified Time
+              <i class="fa fa-sort" aria-hidden="true"></i>
+            </th>
+            <th class="col-2">Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

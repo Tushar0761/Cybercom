@@ -1,8 +1,5 @@
 body {
   background: url(./bg.jpg);
+  width: auto;
   padding: 30px;
-}
-
-#taskTable {
-  max-width: calc(100vw - 15vw);
 }
