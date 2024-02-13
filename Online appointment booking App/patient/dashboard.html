@@ -1,0 +1,88 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../assest/style.css" />
+    <title>Patient</title>
+  </head>
+  <body class="bg-light">
+    <!-- body -->
+
+    <div class="d-flex">
+      <!-- Panel 1  -->
+
+      <div id="Panel" class="w-25 bg-warning p-3">
+        <h3 id="hello">
+          Hello
+          <span id="userName"></span>
+        </h3>
+
+        <div id="links">
+          <a href="./Dashboard.html">
+            <div>Dashboard</div>
+          </a>
+
+          <a id="logout" href="#">
+            <div id="abc">Logout</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Panel 2 -->
+
+      <div id="Main" class="bg-light w-100 p-2">
+        <h2 id="heading" class="">Appointments</h2>
+
+        <button class="ms-3 btn btn-success" id="addBtn">
+          + Add New Appointment
+        </button>
+        <div id="hiddenForm">
+          <div class="d-flex flex-wrap border rounded p-2 m-1 shadow">
+            <div class="col-10 container">
+              <input
+                type="text"
+                class="form-control"
+                name=""
+                id="reason"
+                placeholder="Reason to meet doctor"
+              />
+            </div>
+            <div class="container d-flex col-10 col-md-6 flex-wrap mt-2">
+              Appointment Date :
+              <input
+                type="date"
+                class="form-control"
+                id="appointmentDate"
+                placeholder=".com"
+              />
+            </div>
+            <div class="container d-flex col-10 col-md-6 flex-wrap mt-2">
+              Select Available Doctor :
+              <select
+                class="form-select form-control"
+                name="selectDoctor"
+                id="selectDoctor"
+              >
+                <option selected value="">Select Doctor</option>
+              </select>
+            </div>
+            <div class="col-12 d-flex justify-content-center mt-2">
+              <button id="bookBtn" class="btn btn-success">Book</button>
+            </div>
+          </div>
+        </div>
+        <!-- form complete -->
+        <hr />
+        <div id="appointmentDiv"></div>
+      </div>
+
+      <!-- panel complete  -->
+    </div>
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>

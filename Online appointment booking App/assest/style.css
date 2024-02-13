@@ -1,0 +1,41 @@
+#loginBoard,
+#RegistraionBoard {
+  width: 450px;
+}
+#loginBoard > div {
+  font-size: 30px;
+  font-weight: bold;
+}
+#help {
+  position: relative;
+}
+#passwordHelp {
+  display: none;
+  position: absolute;
+  width: max-content;
+}
+#error-accountType,
+#error-registration-confirmPassword,
+#error-registration-email,
+#error-registration-name,
+#error-registration-password,
+#error-registration-state,
+#error-email-login,
+#error-password-login {
+  display: none;
+}
+
+#hiddenForm {
+  display: none;
+}
+
+/* common css  */
+
+#Panel,
+#Main {
+  height: 100vh;
+}
+
+#Main {
+  overflow: scroll;
+}

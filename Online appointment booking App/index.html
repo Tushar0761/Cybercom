@@ -1,0 +1,60 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="./assest/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>Login</title>
+  </head>
+  <body class="bg-light d-flex justify-content-center align-items-center">
+    <main id="loginBoard" class="text-center border round">
+      <div>Login</div>
+      <section class="d-flex flex-column container">
+        <input
+          type="email"
+          name="email"
+          id="LoginEmail"
+          class="form-control mb-2"
+          placeholder="email : abc@example.com"
+        />
+        <span id="error-email-login" class="text-left text-danger mb-3"
+          >Enter Valid Email</span
+        >
+        <div id="password mb-2" class="d-flex align-items-center">
+          <input
+            type="password"
+            name="password"
+            id="LoginPassword"
+            placeholder="password"
+            class="form-control"
+          />
+          <div id="help">
+            <i class="fa fa-question-circle p-2" id="helpIcon"></i>
+            <div class="bg-white rounded border" id="passwordHelp">
+              It should be at least 8 character long
+            </div>
+          </div>
+        </div>
+        <span id="error-password-login" class="text-left text-danger mb-3"
+          >Enter Valid Password</span
+        >
+        <button id="loginBtn" class="btn btn-success mt-2 mb-3">Login</button>
+        <center>OR</center>
+        <a href="./registration.html">
+          <button class="btn btn-success mt-2 mb-3" id="registerBtn">
+            Register Now
+          </button>
+        </a>
+      </section>
+    </main>
+    <script src="./assest/app.js" type="module"></script>
+  </body>
+</html>

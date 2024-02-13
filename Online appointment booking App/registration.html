@@ -1,0 +1,93 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="./assest/style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>Registration</title>
+  </head>
+  <body class="bg-light d-flex justify-content-center align-items-center">
+    <main id="RegistraionBoard" class="p-4 border round">
+      <div style="font-size: 30px; font-weight: bold" class="text-center">
+        Regitstration
+      </div>
+      <div id="form">
+        <section id="Name" class="mb-3">
+          <input
+            type="text"
+            class="form-control"
+            name="Name"
+            id="registraion-name"
+            placeholder="Full Name"
+          />
+          <span id="error-registration-name" class="text-danger"></span>
+        </section>
+
+        <section id="Eamil" class="mb-3">
+          <input
+            type="email"
+            class="form-control"
+            name="Email ID"
+            id="registraion-email"
+            placeholder="email"
+          />
+          <span id="error-registration-email" class="text-danger"></span>
+        </section>
+        <section id="Pass" class="mb-3">
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            id="registraion-password"
+            placeholder="User Password"
+          />
+          <span id="error-registration-password" class="text-danger"></span>
+        </section>
+        <section id="confirmPassword" class="mb-3">
+          <input
+            type="password"
+            class="form-control"
+            name="confirmPassword"
+            id="registraion-confirmPassword"
+            placeholder="Confirm User Password"
+          />
+          <span
+            id="error-registration-confirmPassword"
+            class="text-danger"
+          ></span>
+        </section>
+        <section id="city" class="mb-3">
+          <select
+            class="form-select form-control"
+            name="account-type"
+            id="accountType"
+          >
+            <option value="">Select Account Type</option>
+
+            <option value="doctor">Doctor</option>
+            <option value="patient">Patient</option>
+          </select>
+          <span id="error-accountType" class="text-danger"
+            >This Field is required</span
+          >
+        </section>
+        <button id="registerBtn" class="btn btn-warning">Register</button>
+      </div>
+
+      <a href="./index.html">
+        <button class="btn btn-dark mt-3">Login</button>
+      </a>
+    </main>
+    <script src="./assest/registration.js" type="module"></script>
+  </body>
+</html>
