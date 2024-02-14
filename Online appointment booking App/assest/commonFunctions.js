@@ -90,6 +90,10 @@ const noLogin =
   '<h1 class="text-center">You are not logged in please login first...</h1>' +
   loginBTN;
 
+//update user
+
+//accept and reject for doctor
+
 export {
   validate,
   validatePass,

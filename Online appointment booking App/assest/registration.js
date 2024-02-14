@@ -1,23 +1,62 @@
 import * as commonFunc from "./commonFunctions.js";
 
+$(document).ready(() => {
+  // Check for if any one is still logged in
+
+  let CURRENT_USER = commonFunc.getSessionStorage("CURRENT_USER");
+
+  if (CURRENT_USER && Object.keys(CURRENT_USER).length) {
+    $("body").html(`<div>
+                      <h1 class="text-center">
+                        You are already login please logout first to register...
+                      </h1>
+                    
+                      <div class="text-center">
+                        <a href="./${CURRENT_USER.type}/dashboard.html">
+                          <button class="btn btn-info">Dashboard</button>
+                        </a>
+
+                        <button class="btn btn-danger" id="logoutBtn">Logout</button>
+                      </div>
+                    </div>
+`);
+
+    $("#logoutBtn").click(logoutHandler);
+  }
+});
+
+function logoutHandler() {
+  commonFunc.setSessionStorage("CURRENT_USER", {});
+  window.location.href = "./";
+}
+
+// initializing user list for duplicate email
+
 const USER_LIST = initialUser_List();
 
 function initialUser_List() {
   let pastList = commonFunc.getLocalStorage("USER_LIST");
 
   if (pastList === null || pastList === undefined) {
+    // If no user list is there then create new empty array
     commonFunc.setLocalStorage("USER_LIST", []);
+
     return [];
   } else {
+    //If user list then return that user list
+
     return pastList;
   }
 }
 
+//--------------------------Form Inputs
 let userName = $("#registraion-name");
 let userEmail = $("#registraion-email");
 let userPassword = $("#registraion-password");
 let confirmPassword = $("#registraion-confirmPassword");
 let accountType = $("#accountType");
+
+//-------------------------- Error msg divs
 
 let userNameErr = $("#error-registration-name");
 let userEmailErr = $("#error-registration-email");
@@ -25,31 +64,47 @@ let userPasswordErr = $("#error-registration-password");
 let confirmPasswordErr = $("#error-registration-confirmPassword");
 let accountTypeErr = $("#error-accountType");
 
+// Registration clicked
+
 $("#registerBtn").click(() => {
   //   first validate detials
   if (validate()) {
+    // Check if user is also present with same email
+
     if (!isUserPresent()) {
+      // Register user to array
+
       registerUser();
+
       clearForm();
     }
   }
 });
 
 function isUserPresent() {
+  //if userlist is empty then return
+
   if (USER_LIST.length === 0) {
-    console.log("list empty");
     return false;
   }
 
   let userFound = false;
+
+  //searching for email
+
   userFound = USER_LIST.find((user) => {
     if (userEmail.val() === user.email) {
       return true;
     }
   });
+
+  //user found then return it
   if (userFound) alert("User already exist please login.");
+
   return userFound;
 }
+
+//validation complete now register new user to user list
 
 function registerUser() {
   let user = {

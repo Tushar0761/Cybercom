@@ -23,7 +23,7 @@
         </h3>
 
         <div id="links">
-          <a href="./Dashboard.html">
+          <a href="./dashboard.html">
             <div>Dashboard</div>
           </a>
 
@@ -36,30 +36,48 @@
       <!-- Panel 2 -->
 
       <div id="Main" class="bg-light w-100 p-2">
-        <h2 id="heading" class="">Appointments</h2>
+        <h2 id="heading" class="">Your Appointments</h2>
+
+        <!-- button for form -->
 
         <button class="ms-3 btn btn-success" id="addBtn">
-          + Add New Appointment
+          + Book Appointment
         </button>
+
+        <!-- Hidden form for book appoint ment  -->
+
         <div id="hiddenForm">
           <div class="d-flex flex-wrap border rounded p-2 m-1 shadow">
             <div class="col-10 container">
               <input
                 type="text"
                 class="form-control"
-                name=""
                 id="reason"
                 placeholder="Reason to meet doctor"
               />
+              <div id="error-reason" class="alert alert-danger">
+                This field is required
+              </div>
             </div>
-            <div class="container d-flex col-10 col-md-6 flex-wrap mt-2">
-              Appointment Date :
-              <input
-                type="date"
-                class="form-control"
-                id="appointmentDate"
-                placeholder=".com"
-              />
+            <div
+              class="container d-flex col-10 col-md-6 flex-wrap mt-2 h-auto border-right"
+            >
+              <div class="col-12">Appointment Date & Time :</div>
+              <div class="col-7 col-md-6">
+                <input
+                  type="date"
+                  class="form-control"
+                  id="appointmentDate"
+                  placeholder=".com"
+                />
+              </div>
+              <div class="col-5">
+                <input type="time" id="appointmentTime" class="form-control
+                form-select" min="09:00" max="18:00" value="09:00" / >
+              </div>
+              <span class="alert alert-danger" id="error-available"
+                >This field is required</span
+              >
             </div>
             <div class="container d-flex col-10 col-md-6 flex-wrap mt-2">
               Select Available Doctor :
@@ -70,14 +88,23 @@
               >
                 <option selected value="">Select Doctor</option>
               </select>
+              <span class="alert alert-danger" id="error-doctor"
+                >This field is required</span
+              >
             </div>
-            <div class="col-12 d-flex justify-content-center mt-2">
+            <div class="mt-2">
               <button id="bookBtn" class="btn btn-success">Book</button>
+              <button id="cancleBtn" class="btn btn-danger">Cancle</button>
             </div>
           </div>
         </div>
+
         <!-- form complete -->
+
         <hr />
+
+        <!-- All appoinment will list here  -->
+
         <div id="appointmentDiv"></div>
       </div>
 

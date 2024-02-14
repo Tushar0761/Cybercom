@@ -6,6 +6,13 @@
   font-size: 30px;
   font-weight: bold;
 }
+
+#loginBody,
+#registrationBody {
+  background: url(../Images/bg.jpg);
+  background-size: cover;
+}
+
 #help {
   position: relative;
 }
@@ -21,7 +28,10 @@
 #error-registration-password,
 #error-registration-state,
 #error-email-login,
-#error-password-login {
+#error-password-login,
+#error-reason,
+#error-available,
+#error-doctor {
   display: none;
 }
 
