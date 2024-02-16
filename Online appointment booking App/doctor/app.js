@@ -72,20 +72,7 @@ function isDoctor(currentUser) {
   if (currentUser.type === "doctor") {
     return true;
   } else if (currentUser.type === "patient") {
-    $("body").html(`
-    <div
-        class="container border rounded bg-white text-center border-danger shadow"
-      >
-        <h2>You dont have access to view this page.</h2>
-        <h4>
-          you are patient, go to patient dashboard
-
-          <a href="../patient/dashboard.html" class="btn btn-primary"
-            >Patient Dashboard</a
-          >
-        </h4>
-      </div>
-    `);
+    $("body").html(badRequest);
 
     return false;
   } else {
@@ -152,6 +139,29 @@ function rejectAppointment(id) {
   commonFunc.setSessionStorage("CURRENT_USER", CURRENT_USER);
 }
 
+function rescheduleAppointment(id) {
+  //----------------------Asking user to reschedule appointment in both patient and doctor
+
+  USER_LIST.map((user) => {
+    user.appointment.map((app) => {
+      if (app.id === id) {
+        app.status = "Ask For Reschedule";
+      }
+    });
+  });
+
+  //---------------------- replace button to message
+
+  $(`#btnDiv-${id}`).html(
+    "<span class='bg-info text-white p-1 rounded'>Reschedule Asked</span>"
+  );
+
+  //----------------------Save data to storage
+
+  commonFunc.setLocalStorage("USER_LIST", USER_LIST);
+  commonFunc.setSessionStorage("CURRENT_USER", CURRENT_USER);
+}
+
 //----------------------Appointment function
 
 function showAppointments() {
@@ -205,6 +215,9 @@ function showAppointments() {
       $(`#rejectBtn-${appointment.id}`).click(() =>
         rejectAppointment(appointment.id)
       );
+      $(`#reschedule-${appointment.id}`).click(() =>
+        rescheduleAppointment(appointment.id)
+      );
     });
   }
 }
@@ -222,11 +235,20 @@ function btnStyles(appointment) {
                   <button class="btn btn-danger"
                   id="rejectBtn-${appointment.id}"               
                   >Reject</button>
+                </div>
+                <div class="m-1">
+                  <button class="btn btn-info"
+                  id="reschedule-${appointment.id}"               
+                  >Reschedule</button>
                 </div>`;
   } else if (appointment.status === "Accepted") {
     //---------------------- Remove button to msg accepted
 
     btnDiv = `<span class='bg-success text-white p-1 rounded'>Accepted</span>`;
+  } else if (appointment.status === "Ask For Reschedule") {
+    //---------------------- Remove button to msg accepted
+
+    btnDiv = `<span class='bg-info text-white p-1 rounded'>Ask For Reschedule</span>`;
   } else {
     //---------------------- Remove button to msg rejected
 
@@ -234,3 +256,18 @@ function btnStyles(appointment) {
   }
   return btnDiv;
 }
+
+const badRequest = `
+    <div
+        class="container border rounded bg-white text-center border-danger shadow"
+      >
+        <h2>You dont have access to view this page.</h2>
+        <h4>
+          you are patient, go to patient dashboard
+
+          <a href="../patient/dashboard.html" class="btn btn-primary"
+            >Patient Dashboard</a
+          >
+        </h4>
+      </div>
+    `;

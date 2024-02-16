@@ -362,30 +362,45 @@ function showAppointments() {
       //----------------------define colour for message
 
       let colorClass;
+      let rescheduleBtn = `
+        <div class="m-1">
+          <button class="btn btn-info" id="reschedule-${appointment.id}">
+            Reschedule
+          </button>
+        </div>`;
 
       if (appointment.status === "Pending") {
         colorClass = "bg-warning text-dark";
       } else if (appointment.status === "Rejected") {
         colorClass = "bg-danger";
+      } else if (appointment.status === "Reschedule") {
+        colorClass = "bg-info";
       } else {
         colorClass = "bg-success";
       }
 
       //---------------------- make card div
 
-      let card = `   <div
-         id="appointmentCard"
-         class="border rounded bg-white p-1 m-1 d-flex flex-wrap shadow"
-         >
-         <div class="d-flex col-12">
-         <div class="fw-bold col-9 col-md-8">Doctor : <b>${appointment.doctorName}</b></div>
-         <div class="status ">
-         Status: <span id="status" class=" text-white ${colorClass} p-1 rounded">${appointment.status}</span>
-         </div>
-         </div>
-         <div class="col-12">Reason:${appointment.reason}</div>
-         <div class="col-12 text-secondary">${appointment.date}</div>
-         </div>`;
+      let card = `<div
+  id="appointmentCard"
+  class="border rounded bg-white p-1 m-1 d-flex flex-wrap shadow"
+>
+  <div class="d-flex col-12">
+    <div class="fw-bold col-8 col-md-7">
+      Doctor : <b>${appointment.doctorName}</b>
+    </div>
+    <div class="status col-4 col-md-5 d-flex">
+      Status:
+      <span id="status" class="text-white ${colorClass} p-1 rounded">${
+        appointment.status
+      }</span>
+        ${appointment.status === "Reschedule" ? rescheduleBtn : ""}
+    </div>
+  </div>
+  <div class="col-12">Reason:${appointment.reason}</div>
+  <div class="col-12 text-secondary">${appointment.date}</div>
+</div>
+`;
 
       div.append(card);
     });

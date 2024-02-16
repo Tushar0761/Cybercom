@@ -68,10 +68,10 @@ function updateRow(index) {
 
   let [priorityInString] = getPriorityDetails(Task.priority);
 
-  let tr = `<td>${Task.category}</td>
+  let tr = `
+            <td>${Task.category}</td>
             <td  id="task${index}">${Task.task}</td>
             <td>${Task.dueDate}</td>
-
             <td>${priorityInString}</td>
             <td>${Task.createdTime}</td>
             <td   id="updatedTime${index}">${Task.updatedTime}</td>
