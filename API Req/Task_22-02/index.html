@@ -1,0 +1,296 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assest/style.css" />
+  </head>
+  <body class="d-flex flex-column h-100">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">Welcome Admin</a>
+      </div>
+    </nav>
+    <main class="flex-grow-1 d-flex w-100 bg-light">
+      <section class="col-2 border border-right-1">
+        <div class="p-2">
+          <button
+            type="button"
+            id="loadUserBtnInput"
+            class="w-100 btn btn-primary"
+          >
+            load Users
+          </button>
+        </div>
+        <div class="p-2">
+          <button
+            type="button"
+            id="savedBtnInput"
+            class="w-100 btn btn-outline-primary"
+          >
+            Liked/Disliked Users
+          </button>
+        </div>
+        <div class="p-2">
+          <button
+            type="button"
+            id="addUserBtnInput"
+            class="w-100 btn btn-outline-primary"
+          >
+            Add User
+          </button>
+        </div>
+        <div class="p-2">
+          <button
+            type="button"
+            id="showNewUserBtnInput"
+            class="w-100 btn btn-outline-primary"
+          >
+            Show Added Users
+          </button>
+        </div>
+      </section>
+
+      <section class="col-10">
+        <!-- Main area -->
+
+        <!-- User Cards -->
+
+        <!-- Page navigation -->
+        <div class="p-3 d-none" id="pageNavDiv">
+          Page :
+          <button value="0" class="pageButton btn btn-primary">1</button>
+          <button value="1" class="pageButton btn btn-outline-primary">
+            2
+          </button>
+          <button value="2" class="pageButton btn btn-outline-primary">
+            3
+          </button>
+          <button value="3" class="pageButton btn btn-outline-primary">
+            4
+          </button>
+          <button value="4" class="pageButton btn btn-outline-primary">
+            5
+          </button>
+          <button value="5" class="pageButton btn btn-outline-primary">
+            6
+          </button>
+          <button value="6" class="pageButton btn btn-outline-primary">
+            7
+          </button>
+          <button value="7" class="pageButton btn btn-outline-primary">
+            8
+          </button>
+          <button value="8" class="pageButton btn btn-outline-primary">
+            9
+          </button>
+          <button value="9" class="pageButton btn btn-outline-primary">
+            10
+          </button>
+        </div>
+
+        <!-- Filtering and sorting div -->
+
+        <div id="searchingAndFilteringDiv" class="d-none d-flex flex-wrap">
+          <!-- search box  -->
+
+          <div
+            id="searchBtnDiv"
+            class="col-9 col-md-6 col-lg-4 p-2 d-flex my-2 my-lg-0"
+          >
+            <input
+              class="form-control me-sm-2"
+              type="text"
+              id="searchTextInput"
+              placeholder="Search User by Id or First Name"
+            />
+            <button class="btn btn-success my-2 my-sm-0" id="searchBtnInput">
+              Search
+            </button>
+          </div>
+          <!-- search box ended  -->
+
+          <!-- Sorting Selection -->
+          <div class="col-3 col-md-4 col-lg-2 d-flex p-3">
+            <select class="form-select" id="sortSelectInput">
+              <option selected value="id">Default Sort</option>
+              <option value="gender">By Gender</option>
+              <option value="weight">By Weight</option>
+              <option value="height">By Height</option>
+            </select>
+          </div>
+
+          <!-- Filter for liked and disliked -->
+
+          <div
+            class="d-none col-3 col-md-4 col-lg-2 d-flex p-3"
+            id="filterGenderSelectDiv"
+          >
+            <select class="form-select" id="filterGenderSelectInput">
+              <option selected value="">All Users</option>
+              <optgroup label="By Gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </optgroup>
+
+              <optgroup label="Reaction">
+                <option value="liked">Liked</option>
+                <option value="disliked">Disliked</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <!-- Sorting ended -->
+        </div>
+
+        <!-- Hidden Spinner -->
+
+        <div id="loaderDiv" class="d-none">
+          <div id="loadingSpinner" class="m-3"></div>
+        </div>
+        <!-- Loader Complete -->
+        <div
+          id="userCardDiv"
+          class="d-flex flex-wrap grid gap-4 justify-content-center pt-3"
+        ></div>
+
+        <div
+          id="addNewUserForm"
+          class="d-none d-flex justify-content-center border mt-3 mx-4 p-2 bg-white shadow"
+        >
+          <form action="#" id="newUserForm">
+            <!-- name input -->
+            <div class="d-flex align-items-center mb-2 flex-wrap">
+              <div class="col-3">Name :</div>
+              <div class="d-flex col-8">
+                <input
+                  type="text"
+                  class="form-control me-1"
+                  id="addUserFirstName"
+                  placeholder="First Name "
+                  required
+                />
+                <input
+                  type="text"
+                  class="form-control ms-1"
+                  id="addUserLastName"
+                  placeholder="Last Name "
+                />
+              </div>
+              <div
+                id="name-error-alert"
+                class="d-none alert alert-danger m-0 p-1 mt-1"
+              >
+                This field is required
+              </div>
+            </div>
+
+            <div class="d-flex col-12 align-items-center mb-2 flex-wrap">
+              <div class="col-3">Username :</div>
+              <div class="d-flex col-8">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="addUserUsername"
+                  placeholder="Username"
+                  required
+                />
+              </div>
+              <div
+                id="username-error-alert"
+                class="d-none alert alert-danger m-0 p-1 mt-1"
+              >
+                This field is required
+              </div>
+            </div>
+
+            <div class="d-flex col-12 align-items-center mb-2 flex-wrap">
+              <div class="col-3">Gender :</div>
+              <div class="d-flex col-8" id="genderRadioInputDiv">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="gender"
+                  value="male"
+                  id=""
+                />
+                <label class="form-check-label me-2" for=""> Male </label>
+
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="gender"
+                  value="female"
+                  id=""
+                />
+                <label class="form-check-label" for=""> Female </label>
+              </div>
+              <div
+                id="gender-error-alert"
+                class="d-none alert alert-danger m-0 p-1 mt-1"
+              >
+                This field is required
+              </div>
+            </div>
+
+            <div class="d-flex flex-wrap col-7 align-items-center mb-2">
+              <div class="col-5">Height :</div>
+              <div class="d-flex col-7">
+                <input
+                  type="number"
+                  class="form-control"
+                  id="addUserHeight"
+                  placeholder="in cms"
+                  required
+                />
+              </div>
+              <div
+                id="height-error-alert"
+                class="d-none alert alert-danger m-0 p-1 mt-1"
+              >
+                This field is required
+              </div>
+            </div>
+
+            <div class="d-flex flex-wrap col-7 align-items-center mb-2">
+              <div class="col-5">Weight :</div>
+              <div class="d-flex col-7">
+                <input
+                  type="number"
+                  class="form-control"
+                  id="addUserWeight"
+                  placeholder="in lbs"
+                  required
+                />
+              </div>
+              <div
+                id="weight-error-alert"
+                class="d-none alert alert-danger m-0 p-1 mt-1"
+              >
+                This field is required
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-success">Submit</button>
+            <!--  -->
+          </form>
+        </div>
+
+        <div
+          id="newUsersAddedDiv"
+          class="d-none d-flex flex-wrap grid gap-4 justify-content-center pt-3"
+        ></div>
+        <!-- Main Area Complete -->
+      </section>
+    </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="./utilities/utility_functions.js"></script>
+    <script src="./assest/validateForm.js"></script>
+    <script src="./assest/app.js"></script>
+  </body>
+</html>
