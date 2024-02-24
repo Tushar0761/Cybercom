@@ -92,9 +92,37 @@ function logoutHandler() {
   window.location.href = "../";
 }
 
+function checkAvailibility(appointmentId) {
+  let isDoctorAvailable = true;
+
+  console.log(CURRENT_USER);
+
+  let currentAppointment = CURRENT_USER.appointment.find(
+    (appoint) => appoint.id === appointmentId
+  );
+  console.log(currentAppointment);
+
+  CURRENT_USER.appointment.forEach((appoint) => {
+    if (
+      appointmentId !== appoint.id &&
+      appoint.date === currentAppointment.date &&
+      appoint.status === "Accepted"
+    ) {
+      isDoctorAvailable = false;
+    }
+  });
+
+  return isDoctorAvailable;
+}
+
 //add appointment button clicked
 function acceptAppointment(id) {
   //----------------------Accepting appointment in both patient and doctor
+
+  if (!checkAvailibility(id)) {
+    alert("Another Patients Appointment is booked on that time.");
+    return;
+  }
 
   USER_LIST.map((user) => {
     user.appointment.map((app) => {
@@ -107,7 +135,7 @@ function acceptAppointment(id) {
   //---------------------- replace button to message
 
   $(`#btnDiv-${id}`).html(
-    "<span class='bg-success text-white p-1 rounded'>Accepted</span>"
+    "<div class='bg-success text-white p-1 rounded'>Accepted</div>"
   );
 
   //----------------------Save data to storage
@@ -130,7 +158,7 @@ function rejectAppointment(id) {
   //---------------------- replace button to message
 
   $(`#btnDiv-${id}`).html(
-    "<span class='bg-danger text-white p-1 rounded'>Rejected</span>"
+    "<div class='bg-danger text-white p-1 rounded'>Rejected</div>"
   );
 
   //----------------------Save data to storage
@@ -153,7 +181,7 @@ function rescheduleAppointment(id) {
   //---------------------- replace button to message
 
   $(`#btnDiv-${id}`).html(
-    "<span class='bg-info text-white p-1 rounded'>Reschedule Asked</span>"
+    "<div class='bg-info text-white p-1 rounded'>Reschedule Asked</div>"
   );
 
   //----------------------Save data to storage
@@ -188,22 +216,36 @@ function showAppointments() {
 
       //---------------------- make card div
 
-      let card = `<div
-            id="appointmentCard"
-            class="border rounded bg-white p-1 m-1 d-flex flex-wrap shadow"
-          >
-            <div class="d-flex col-12">
-              <div class="fw-bold col-9 col-md-7 ">
-                Patient : <b>${appointment.patientName}</b>
-              </div>
-              <div class="status col-4 d-flex" id="btnDiv-${appointment.id}">
+      let card = `
+                   
+<div
+  id="appointmentCard-${appointment.id}"
+  class="border rounded bg-white p-1 m-1 mb-3 d-flex  shadow"
+>
+  <div class="col-8">
+    <table class="table ">
+        
+    <tr>
+<th  class="col-3">Reason :</th>
+<td>${appointment.reason}</td>
+</tr>
+
+    <tr>
+          <th class="col-3">Patient :</th>
+          <td>${appointment.patientName}</td>
+      </tr>
+
+
+      <tr     id="appointmentDate-${appointment.id}">
+       
+          <td colspan="2">${appointment.date}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div  id="btnDiv-${appointment.id}" class="col-4 col-md-3">
                 ${btnDiv}
-              </div>
-            </div>
-            <div class="col-12">Reason: ${appointment.reason}</div>
-            <div class="col-12 text-secondary">${appointment.date}</div>
-          </div>
-        </div> `;
+</div> `;
 
       div.append(card);
 
@@ -244,15 +286,15 @@ function btnStyles(appointment) {
   } else if (appointment.status === "Accepted") {
     //---------------------- Remove button to msg accepted
 
-    btnDiv = `<span class='bg-success text-white p-1 rounded'>Accepted</span>`;
+    btnDiv = `<div class='bg-success text-white p-1 rounded'>Accepted</div>`;
   } else if (appointment.status === "Ask For Reschedule") {
     //---------------------- Remove button to msg accepted
 
-    btnDiv = `<span class='bg-info text-white p-1 rounded'>Ask For Reschedule</span>`;
+    btnDiv = `<div class='bg-info text-white p-1 rounded'>Ask For Reschedule</div>`;
   } else {
     //---------------------- Remove button to msg rejected
 
-    btnDiv = `<span class='bg-danger text-white p-1 rounded'>Rejected</span>`;
+    btnDiv = `<div class='bg-danger text-white p-1 rounded'>Rejected</div>`;
   }
   return btnDiv;
 }

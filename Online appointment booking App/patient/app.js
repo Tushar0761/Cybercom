@@ -1,5 +1,4 @@
 import * as commonFunc from "../assest/commonFunctions.js";
-
 //---------------------- Load User
 
 let USER_LIST = commonFunc.getLocalStorage("USER_LIST");
@@ -37,6 +36,75 @@ function checkLogin() {
     }
   }
 }
+//reschedule button
+
+let rescheduleAppointment = (appointmentId, appointmentObject) => {
+  let dateDiv = $(`#appointmentDate-${appointmentId}`);
+
+  dateDiv.html(`<td
+  colspan="2"
+              class="border border-danger p-1 shadow"
+            >
+            <div class="d-flex flex-wrap">
+              <div class="col-12 text-dark">Appointment Date & Time :</div>
+              <div class="col-4 col-md-6">
+                <input
+                  type="date"
+                  class="form-control form-control-sm"
+                  id="appointmentRescheduleDate-${appointmentId}"
+                  value="${appointmentObject.date.split(" ")[0]}"
+                />
+              </div>
+              <div class="col-3">
+                <input type="time" id="appointmentRescheduleTime-${appointmentId}" class="form-control form-control-sm 
+                form-select form-select-sm " min="09:00" max="18:00" value="${
+                  appointmentObject.date.split(" ")[1]
+                }" / >
+              </div>
+              <div>
+<button class="btn btn-success" id="change-${appointmentId}"> Change</button>
+</div>
+            </div>
+
+              
+            </td>`);
+
+  console.log($(`#change-${appointmentId}`));
+
+  $(`#change-${appointmentId}`).click(() => {
+    let newDate = $(`#appointmentRescheduleDate-${appointmentId}`);
+    let newTime = $(`#appointmentRescheduleTime-${appointmentId}`);
+
+    USER_LIST = commonFunc.getLocalStorage("USER_LIST");
+
+    newDate = newDate.val() + " " + newTime.val();
+
+    CURRENT_USER.appointment.map((appoint) => {
+      if (appoint.id === appointmentId) {
+        appoint.status = "Pending";
+        appoint.date = newDate;
+      }
+    });
+
+    USER_LIST.forEach((user) => {
+      if (
+        user.id === appointmentObject.doctorId ||
+        user.id === appointmentObject.patientId
+      ) {
+        user.appointment.map((appoint) => {
+          if (appoint.id === appointmentId) {
+            appoint.date = newDate;
+            appoint.status = "Pending";
+          }
+        });
+      }
+    });
+
+    commonFunc.setLocalStorage("USER_LIST", USER_LIST);
+    commonFunc.setSessionStorage("CURRENT_USER", CURRENT_USER);
+    showAppointments();
+  });
+};
 
 // all reload refresh session storage
 
@@ -53,30 +121,39 @@ $(document).ready(() => {
   }
 });
 
+//-------------
+
+//taking values
+
+let reasonInput = $("#reason");
+let dateInput = $("#appointmentDate");
+let doctorInput = $("#selectDoctor");
+let timeInput = $("#appointmentTime");
+
 //--------- reason blur validation check
 
-$("#reason").blur(() => {
-  validateReason($("#reason").val());
+reasonInput.blur(() => {
+  validateReason(reasonInput.val());
 });
 
 //--------- date blur validation check
 
-$("#appointmentDate").blur(() => {
-  validateDateTime($("#appointmentDate").val(), $("#appointmentTime").val());
-  checkAvailability();
+dateInput.blur(() => {
+  validateDateTime(dateInput.val(), timeInput.val());
+  checkAvailability(dateInput.val(), doctorInput.val(), timeInput.val());
 });
 
 //--------- time blur validation check
-$("#appointmentTime").blur(() => {
-  validateDateTime($("#appointmentDate").val(), $("#appointmentTime").val());
-  checkAvailability();
+timeInput.blur(() => {
+  validateDateTime(dateInput.val(), timeInput.val());
+  checkAvailability(dateInput.val(), doctorInput.val(), timeInput.val());
 });
 
 //--------- doctor blur validation check
 
-$("#selectDoctor").blur(() => {
-  validateDoctor($("#selectDoctor").val());
-  checkAvailability();
+doctorInput.blur(() => {
+  validateDoctor(doctorInput.val());
+  checkAvailability(dateInput.val(), doctorInput.val(), timeInput.val());
 });
 
 function updatedUser() {
@@ -152,23 +229,28 @@ $("#cancleBtn").click(() => {
 $("#bookBtn").click(bookAppointment);
 
 function bookAppointment() {
-  //taking values
-
-  let reason = $("#reason").val();
-  let date = $("#appointmentDate").val();
-  let doctor = $("#selectDoctor").val();
-  let time = $("#appointmentTime").val();
-
   //validating values
-  if (validateAppointment(reason, date, doctor, time)) {
+  if (
+    validateAppointment(
+      reasonInput.val(),
+      dateInput.val(),
+      doctorInput.val(),
+      timeInput.val()
+    )
+  ) {
     //booking appointment using validated values
 
-    addAppointment(reason, date, doctor, time);
+    addAppointment(
+      reasonInput.val(),
+      dateInput.val(),
+      doctorInput.val(),
+      timeInput.val()
+    );
 
     //clearing form values
 
-    $("#reason").val("");
-    $("#selectDoctor").val("");
+    reasonInput.val("");
+    doctorInput.val("");
 
     //hiding form
 
@@ -178,15 +260,15 @@ function bookAppointment() {
 
 //appointment booking function
 
-function addAppointment(reason, date, doctor, time) {
+function addAppointment(reasonValue, dateValue, doctorValue, timeValue) {
   //creating appointment details object
 
   let appointmentObject = {
     id: new Date().getTime(),
-    reason: reason,
-    date: date + " " + time,
-    doctorId: doctor.split(" ")[0],
-    doctorName: doctor.split(" ").slice(1).join(" "),
+    reason: reasonValue,
+    date: dateValue + " " + timeValue,
+    doctorId: doctorValue.split(" ")[0],
+    doctorName: doctorValue.split(" ").slice(1).join(" "),
     patientId: CURRENT_USER.id,
     patientName: CURRENT_USER.name,
     status: "Pending",
@@ -215,26 +297,22 @@ function addAppointment(reason, date, doctor, time) {
 
 //validate function
 
-function validateAppointment(reason, date, doctor, time) {
+function validateAppointment(reasonValue, dateValue, doctorValue, timeValue) {
   let bool = true;
 
-  bool = validateReason(reason) && bool;
-  bool = validateDoctor(doctor) && bool;
-  bool = validateDateTime(date, time) && bool;
+  bool = validateReason(reasonValue) && bool;
+  bool = validateDoctor(doctorValue) && bool;
+  bool = validateDateTime(dateValue, timeValue) && bool;
 
-  bool = checkAvailability() && bool;
+  bool = checkAvailability(dateValue, doctorValue, timeValue) && bool;
 
   return bool;
 }
 
 //----------------check availibility of doctor
 
-function checkAvailability() {
-  let date = $("#appointmentDate").val();
-  let doctor = $("#selectDoctor").val();
-  let time = $("#appointmentTime").val();
-
-  let doctorId = doctor.split(" ")[0];
+function checkAvailability(dateValue, doctorValue, timeValue) {
+  let doctorId = doctorValue.split(" ")[0];
 
   let doctorObject = USER_LIST.find((obj) => obj.id === doctorId);
 
@@ -242,7 +320,11 @@ function checkAvailability() {
     let isDoctorBusy = false;
 
     doctorObject.appointment.filter((appoint) => {
-      if (appoint.date === date + " " + time) {
+      console.log(appoint);
+      if (
+        appoint.date === dateValue + " " + timeValue &&
+        appoint.status === "Accepted"
+      ) {
         isDoctorBusy = true;
       }
     });
@@ -264,8 +346,8 @@ function checkAvailability() {
 
 //------------------ validate doctor is selected or not
 
-function validateDoctor(doctor) {
-  if (!validate(doctor)) {
+function validateDoctor(doctorValue) {
+  if (!validate(doctorValue)) {
     $("#error-doctor").slideDown();
 
     return false;
@@ -277,8 +359,8 @@ function validateDoctor(doctor) {
 
 //------------------ validate date time required
 
-function validateDateTime(date, time) {
-  if (!validate(date) || !validateWorkingHours(time)) {
+function validateDateTime(dateValue, timeValue) {
+  if (!validate(dateValue) || !validateWorkingHours(timeValue)) {
     $("#error-available").slideDown();
     return false;
   } else {
@@ -289,10 +371,10 @@ function validateDateTime(date, time) {
 
 //------------------ validate working hours 9-6
 
-function validateWorkingHours(time) {
-  time = time.split(":");
+function validateWorkingHours(timeValue) {
+  timeValue = timeValue.split(":");
 
-  if (time[0] >= "09" && time[0] <= "17") {
+  if (timeValue[0] >= "09" && timeValue[0] <= "17") {
     return true;
   } else {
     $("#error-available")
@@ -304,8 +386,8 @@ function validateWorkingHours(time) {
 
 //------------------ validate Reason
 
-function validateReason(reason) {
-  if (!validate(reason)) {
+function validateReason(reasonValue) {
+  if (!validate(reasonValue)) {
     $("#error-reason").slideDown();
     return false;
   } else {
@@ -316,8 +398,8 @@ function validateReason(reason) {
 
 //validate string
 
-function validate(str) {
-  if (str === "") return false;
+function validate(value) {
+  if (value === "") return false;
   return true;
 }
 
@@ -329,13 +411,15 @@ function addDoctorList() {
   });
 
   filterDoctorList.forEach((doctor) => {
-    $("#selectDoctor").append(
+    doctorInput.append(
       `<option value="${doctor.id + " " + doctor.name}">
       ${doctor.name}
       </option>`
     );
   });
 }
+
+//---------------------rescheduleAppointment
 
 //----------------------Appointment function
 
@@ -364,8 +448,8 @@ function showAppointments() {
       let colorClass;
       let rescheduleBtn = `
         <div class="m-1">
-          <button class="btn btn-info" id="reschedule-${appointment.id}">
-            Reschedule
+          <button class="btn btn-success shadow" id="rescheduleBtn-${appointment.id}">
+            Reschedule Now
           </button>
         </div>`;
 
@@ -373,7 +457,7 @@ function showAppointments() {
         colorClass = "bg-warning text-dark";
       } else if (appointment.status === "Rejected") {
         colorClass = "bg-danger";
-      } else if (appointment.status === "Reschedule") {
+      } else if (appointment.status === "Ask For Reschedule") {
         colorClass = "bg-info";
       } else {
         colorClass = "bg-success";
@@ -381,28 +465,50 @@ function showAppointments() {
 
       //---------------------- make card div
 
-      let card = `<div
-  id="appointmentCard"
-  class="border rounded bg-white p-1 m-1 d-flex flex-wrap shadow"
+      let card = `
+<div
+  id="appointmentCard-${appointment.id}"
+  class="border rounded bg-white p-1 m-1 d-flex  shadow"
 >
-  <div class="d-flex col-12">
-    <div class="fw-bold col-8 col-md-7">
-      Doctor : <b>${appointment.doctorName}</b>
-    </div>
-    <div class="status col-4 col-md-5 d-flex">
-      Status:
-      <span id="status" class="text-white ${colorClass} p-1 rounded">${
-        appointment.status
-      }</span>
-        ${appointment.status === "Reschedule" ? rescheduleBtn : ""}
-    </div>
+  <!-- tablee -->
+  <div class="col-8">
+    <table class="table ">
+        
+    <tr>
+<th  class="col-3">Reason :</th>
+<td>${appointment.reason}</td>
+</tr>
+
+    <tr>
+          <th class="col-3">Doctor :</th>
+          <td>${appointment.doctorName}</td>
+      </tr>
+
+
+      <tr     id="appointmentDate-${appointment.id}">
+       
+          <td colspan="2">${appointment.date}</td>
+      </tr>
+    </table>
   </div>
-  <div class="col-12">Reason:${appointment.reason}</div>
-  <div class="col-12 text-secondary">${appointment.date}</div>
+
+  <div class="col-4 col-md-3">
+    <div id="status" class="status text-white ${colorClass} p-1 rounded ">
+        ${appointment.status}
+        </div>
+        ${appointment.status === "Ask For Reschedule" ? rescheduleBtn : ""}
+        </div>
 </div>
+
 `;
 
       div.append(card);
+
+      if (appointment.status === "Ask For Reschedule") {
+        $(`#rescheduleBtn-${appointment.id}`).click(() => {
+          rescheduleAppointment(appointment.id, appointment);
+        });
+      }
     });
   }
 }

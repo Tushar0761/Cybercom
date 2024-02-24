@@ -53,6 +53,7 @@ function toggleErrorMsg(error, errorArea, errorMsg, inputField) {
     $(errorArea).hide().text(errorMsg).removeClass("d-none").slideDown();
 
     $(inputField).addClass("border-danger");
+    console.log(errorArea, errorMsg, inputField);
   } else {
     $(errorArea).slideUp();
     $(inputField).removeClass("border-danger");

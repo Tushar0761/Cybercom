@@ -1,8 +1,8 @@
-// let bored_API = "https://www.boredapi.com/api/activity/";
+let bored_API = "https://www.boredapi.com/api/activity/";
 
 // function sendReq() {
 //   let xhr = new XMLHttpRequest();
-//   let url = "https://reqres.in/api/users";
+//   //   //   let url = "https://reqres.in/api/users";
 //   xhr.open("GET", bored_API, true);
 //   xhr.send();
 
@@ -22,6 +22,26 @@
 //     }
 //   };
 // }
+
+//storing in local storage
+function sendReq() {
+  let url = "https://reqres.in/api/users";
+
+  let SEND_REQ_RESP = localStorage.getItem("SEND_REQ_RESP") || null;
+  if (SEND_REQ_RESP) {
+    console.log("in if");
+    processData(JSON.parse(SEND_REQ_RESP));
+    return;
+  }
+
+  fetch(url)
+    .then((resp) => resp.json())
+    .then((data) => {
+      console.log("req send");
+      processData(data);
+      localStorage.setItem("SEND_REQ_RESP", JSON.stringify(data));
+    });
+}
 
 // function dogImage() {
 //   let url = "https://dog.ceo/api/breeds/image/random";
@@ -176,48 +196,37 @@
 
 //------------------------with fetch api
 
-let bored_API = "https://www.boredapi.com/api/activity/";
+// let bored_API = "https://www.boredapi.com/api/activity/";
 
 //with
-function sendReq() {
-  /* 
-  let url = "https://reqres.in/api/users?per_page=5&page=3";
+// function sendReq() {
+//   let url = "https://reqres.in/api/users";
 
-  fetch(url)
-    .then((resp) => {
-      console.log(resp.status);
-      console.log(resp.headers);
-      return resp.json();
-    })
-    .then((data) => {
-      processData(data);
-    });
- */
-  let url = "http://localhost:3001/";
+//   fetch(url)
+//     .then((resp) => {
+//       console.log(resp.status);
+//       console.log(resp.headers);
+//       return resp.json();
+//     })
+//     .then((data) => {
+//       processData(data);
+//     });
 
-  fetch(url)
-    .then((resp) => resp.text())
-    .then((data) => {
-      $("#resultDiv").html(data);
+// xhr.onreadystatechange = function () {
+//   if (xhr.readyState === 4) {
 
-      console.log(data);
-    });
+//     let data = JSON.parse(xhr.response);
 
-  // xhr.onreadystatechange = function () {
-  //   if (xhr.readyState === 4) {
+//     let content = `${this.status}`;
 
-  //     let data = JSON.parse(xhr.response);
+//     for (d in data) {
+//       content += `<br /> ${d} -> ${data[d]}`;
+//     }
 
-  //     let content = `${this.status}`;
-
-  //     for (d in data) {
-  //       content += `<br /> ${d} -> ${data[d]}`;
-  //     }
-
-  //     $("#resultDiv").html(content);
-  //   }
-  // };
-}
+//     $("#resultDiv").html(content);
+//   }
+// };
+// }
 
 function dogImage() {
   let url = "https://dog.ceo/api/breeds/image/random";
@@ -271,7 +280,6 @@ function findUser() {
           return resp.json();
         })
         .then((data) => {
-          console.log("here");
           let user = data.data;
           makeCard({ data: [user] });
         })
@@ -316,7 +324,6 @@ function createUser() {
       })
       .then((data) => {
         $("#resultDiv").text(JSON.stringify(data));
-        console.log(data);
       })
       .catch((err) => {
         console.log(err);
@@ -346,7 +353,7 @@ function updateUser() {
 
   if (userName !== "" && userJob !== "" && userId !== "") {
     fetch(URL + "/" + userId, {
-      method: "POST",
+      method: "PUT",
       body: { job: userJob, uname: userName },
     })
       .then((resp) => {
@@ -361,7 +368,6 @@ function updateUser() {
       })
       .then((data) => {
         $("#resultDiv").text(JSON.stringify(data));
-        console.table(data);
       });
   } else {
     alert("please provide details");
@@ -377,10 +383,7 @@ function processData(response) {
 }
 
 function makeCard(data) {
-  console.table(data);
-
   let userList = data.data;
-  console.log(userList);
 
   $("#userCards").html("");
 

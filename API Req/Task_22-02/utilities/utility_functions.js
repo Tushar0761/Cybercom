@@ -103,6 +103,8 @@ function toggleVisibility(showIds) {
     "pageNavDiv",
     "searchBtnDiv",
     "userCardDiv",
+    "updatedUsersDiv",
+    "updateUserFormDiv",
   ];
 
   allSections.forEach((section) => {

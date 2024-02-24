@@ -12,18 +12,19 @@
   <body class="d-flex flex-column h-100">
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
       <div class="container">
-        <a class="navbar-brand" href="#">Welcome Admin</a>
+        <a class="navbar-brand" href="#">Meow Meow</a>
+        <span class="text-white">Tinder For Your Cat🙀🐈</span>
       </div>
     </nav>
     <main class="flex-grow-1 d-flex w-100 bg-light">
-      <section class="col-2 border border-right-1">
+      <section class="col-5 col-sm-2 border border-right-1">
         <div class="p-2">
           <button
             type="button"
             id="loadUserBtnInput"
             class="w-100 btn btn-primary"
           >
-            load Users
+            load Cats
           </button>
         </div>
         <div class="p-2">
@@ -32,7 +33,7 @@
             id="savedBtnInput"
             class="w-100 btn btn-outline-primary"
           >
-            Liked/Disliked Users
+            Reacted Cats
           </button>
         </div>
         <div class="p-2">
@@ -41,7 +42,7 @@
             id="addUserBtnInput"
             class="w-100 btn btn-outline-primary"
           >
-            Add User
+            Add Cats
           </button>
         </div>
         <div class="p-2">
@@ -50,7 +51,26 @@
             id="showNewUserBtnInput"
             class="w-100 btn btn-outline-primary"
           >
-            Show Added Users
+            Show Added Cats
+          </button>
+        </div>
+
+        <div class="p-2">
+          <button
+            type="button"
+            id="showUpdateUserFormBtnInput"
+            class="w-100 btn btn-outline-primary"
+          >
+            Update Cats
+          </button>
+        </div>
+        <div class="p-2">
+          <button
+            type="button"
+            id="showUpdatedUserBtnInput"
+            class="w-100 btn btn-outline-primary"
+          >
+            Show Update Cats
           </button>
         </div>
       </section>
@@ -164,6 +184,10 @@
         >
           <form action="#" id="newUserForm">
             <!-- name input -->
+
+            <h3 class="text-center border-bottom pb-2 col-12">
+              Add New Cat From
+            </h3>
             <div class="d-flex align-items-center mb-2 flex-wrap">
               <div class="col-3">Name :</div>
               <div class="d-flex col-8">
@@ -284,6 +308,70 @@
           id="newUsersAddedDiv"
           class="d-none d-flex flex-wrap grid gap-4 justify-content-center pt-3"
         ></div>
+
+        <div
+          id="updateUserFormDiv"
+          class="d-none d-flex flex-wrap justify-content-center border mt-3 mx-4 p-2 bg-white shadow"
+        >
+          <h3 class="text-center border-bottom pb-2 col-12">Update Cat From</h3>
+          <form action="#" id="updateUserForm">
+            <div
+              class="d-flex align-items-center mb-2 flex-wrap border-bottom border-dark pb-3"
+            >
+              <div class="col-3">User id:</div>
+              <div class="d-flex col-8">
+                <input
+                  type="number"
+                  class="form-control"
+                  id="updateUserId"
+                  placeholder="User Id which you want to update"
+                  required
+                />
+              </div>
+              <div
+                id="id-error-alert-update"
+                class="d-none alert alert-danger m-0 p-1 mt-1"
+              >
+                This field is required
+              </div>
+            </div>
+
+            <!-- name input -->
+            <div class="d-flex align-items-center mb-2 flex-wrap">
+              <div class="col-3">Name :</div>
+              <div class="d-flex col-8">
+                <input
+                  type="text"
+                  class="form-control me-1"
+                  id="updateUserFirstName"
+                  placeholder="First Name "
+                  required
+                />
+                <input
+                  type="text"
+                  class="form-control ms-1"
+                  id="updateUserLastName"
+                  placeholder="Last Name "
+                />
+              </div>
+              <div
+                id="name-error-alert-update"
+                class="d-none alert alert-danger m-0 p-1 mt-1"
+              >
+                This field is required
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-success">Update</button>
+            <!--  -->
+          </form>
+        </div>
+
+        <div
+          id="updatedUsersDiv"
+          class="d-none d-flex flex-wrap grid gap-4 justify-content-center pt-3"
+        ></div>
+
         <!-- Main Area Complete -->
       </section>
     </main>

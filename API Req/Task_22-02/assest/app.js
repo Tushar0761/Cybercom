@@ -8,6 +8,7 @@ const USER_DATA = getLocalStorage("USER_DATA") ?? {
   likedUserId: [],
   dislikedUserId: [],
   createdNewUsers: [],
+  updatedUser: [],
 };
 
 let CURRENT_USERLIST;
@@ -346,21 +347,23 @@ $("#showNewUserBtnInput").click(function () {
 
   CURRENT_USERLIST = USER_DATA.createdNewUsers;
 
-  loadNewUsers(USER_DATA.createdNewUsers);
+  loadNewUsers(USER_DATA.createdNewUsers, "newUsersAddedDiv");
 });
 
-function loadNewUsers(newUsersArray) {
-  if (!newUsersArray) {
-    $("#newUsersAddedDiv").html("<h1>No new users added yet</h1>");
+function loadNewUsers(UsersArray, cardDivId) {
+  let cardDiv = $(`#${cardDivId}`);
+  if (!UsersArray.length) {
+    console.log("no cats");
+
+    cardDiv.html("<h1>No New Cats added yet</h1>");
     return;
   }
 
-  let newUserCardDiv = $("#newUsersAddedDiv");
-  newUserCardDiv.html("");
+  cardDiv.html("");
 
-  newUsersArray.forEach((user) => {
+  UsersArray.forEach((user) => {
     let [card, userliked] = cardDivGenerator(user);
-    newUserCardDiv.append(card);
+    cardDiv.append(card);
 
     let generatedClass = `${userliked && "border-3"} ${
       userliked === 1
@@ -392,3 +395,101 @@ $("#savedBtnInput").click(function () {
 
   loadUsers(CURRENT_USERLIST);
 });
+
+//--------------------------update form submit
+$("#showUpdateUserFormBtnInput").click(function () {
+  activeBtn("showUpdateUserFormBtnInput");
+
+  toggleVisibility(["updateUserFormDiv"]);
+});
+
+$("#showUpdatedUserBtnInput").click(function () {
+  activeBtn("showUpdatedUserBtnInput");
+
+  toggleVisibility(["updatedUsersDiv"]);
+
+  CURRENT_USERLIST = USER_DATA.updatedUser;
+
+  loadNewUsers(USER_DATA.updatedUser, "updatedUsersDiv");
+});
+
+$("#updateUserForm").submit((event) => {
+  event.preventDefault();
+
+  let id = $(`#updateUserId`).val();
+  let firstName = $(`#updateUserFirstName`).val();
+  let lastName = $(`#updateUserLastName`).val();
+
+  if (!validateUpdateForm(id, firstName, lastName)) {
+    return;
+  }
+
+  updateApiCall(id, firstName, lastName);
+
+  clearUpdateForm();
+});
+
+function validateUpdateForm(id, firstName, lastName) {
+  let bool = true;
+  bool = validateNameUpdate(firstName) && bool;
+  bool = validateNameUpdate(lastName) && bool;
+
+  if (id >= 100 || id < 0) {
+    toggleErrorMsg(
+      true,
+      "#id-error-alert-update",
+      "Invalid id (limit : 1-100)"
+    );
+    bool = false;
+  }
+
+  return bool;
+}
+
+function validateNameUpdate(value) {
+  let validation = false;
+
+  validation = /^[^\d\s]+$/.test(value);
+
+  toggleErrorMsg(
+    !validation,
+    "#name-error-alert-update",
+    "Name cannot contain Number is required"
+  );
+
+  return validation;
+}
+
+function updateApiCall(id, fN, lN) {
+  fetch(API_URL + "/" + id, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      firstName: fN,
+      lastName: lN,
+    }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      alert("User updated successfully");
+
+      USER_DATA.updatedUser.push(data);
+
+      setLocalStorage("USER_DATA", USER_DATA);
+    })
+    .catch((error) => {
+      console.log("something wrong happenned", error);
+      alert(error);
+    });
+}
+
+function clearUpdateForm() {
+  $("#updateUserId").val("");
+  $("#updateUserFirstName").val("");
+  $("#updateUserLastName").val("");
+}
