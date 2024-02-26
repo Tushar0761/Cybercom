@@ -318,8 +318,6 @@ function addNewUserApiCall(newUser) {
     USER_DATA.createdNewUsers.push(newUser);
   }
 
-  setLocalStorage("USER_DATA", USER_DATA);
-
   fetch("https://dummyjson.com/users/add", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -336,6 +334,7 @@ function addNewUserApiCall(newUser) {
       console.error(error);
     });
 
+  setLocalStorage("USER_DATA", USER_DATA);
   alert("User added successfully");
 }
 // --------------------- show new added users
