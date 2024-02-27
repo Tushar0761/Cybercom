@@ -1,4 +1,6 @@
 const GET_URL = "https://api.escuelajs.co/api/v1/products";
+let allProductArray = [];
+
 // query = "?limit=10&offset=9";
 
 //divs
@@ -13,20 +15,25 @@ const seacrhBarBtn = $("#seacrhBarBtn");
 //searching function
 seacrhBarBtn.click(async function () {
   toggleLoader(true);
+
   if (seacrhBarInput.val() === "") {
     alert("Please enter a valid search");
     toggleLoader(false);
     return;
-  } else if (isNaN(seacrhBarInput.val())) {
+  } else if (!isNaN(seacrhBarInput.val())) {
     alert("Please enter a valid search");
     toggleLoader(false);
     return;
   }
+
   try {
-    let product = await getProducts(0, `/${seacrhBarInput.val()}`);
-    let productArray = [product];
-    cardGenerator(productArray);
+    allProductArray = await getProducts(`?title=${seacrhBarInput.val()}`);
+
+    divideIntoPages(allProductArray.length);
+
+    cardGenerator(allProductArray);
   } catch (error) {
+    console.log(error);
     productDiv.html(
       `<h1 class="text-center text-danger">No product found</h1>`
     );
@@ -49,7 +56,7 @@ function toggleLoader(bool = false) {
   }
 }
 //Get Fetch API
-async function getProducts(offset = 0, query = `?limit=12&offset=${offset}`) {
+async function getProducts(query = "") {
   try {
     const response = await fetch(GET_URL + query);
 
@@ -67,34 +74,56 @@ async function getProducts(offset = 0, query = `?limit=12&offset=${offset}`) {
 
 $(document).ready(async function () {
   toggleLoader(true);
-  let productArray = await getProducts();
 
-  cardGenerator(productArray);
+  allProductArray = await getProducts();
+
+  divideIntoPages(allProductArray.length);
+
+  cardGenerator(allProductArray, 0);
   toggleLoader(false);
 });
+//create pagination divs
+function divideIntoPages(length) {
+  $("#paginationUl").html("");
+  let pages = Math.ceil(length / 10);
+
+  for (let i = 0; i < pages; i++) {
+    let li = `<li id="${i}" class="page-item"
+    ><a class="page-link" href="#">${i + 1}</a></li>`;
+
+    $("#paginationUl").append(li);
+    $("#" + i).click(() => {
+      paginationHandler(i);
+    });
+  }
+
+  $("#paginationUl li").first().addClass("active");
+}
 
 //pagination link clicked
-$("#paginationUl li").click(async function () {
+$("#paginationUl li").click();
+
+async function paginationHandler(id) {
   toggleLoader(true);
   $("#paginationUl li").removeClass("active");
-  $(this).addClass("active");
+  $(`#${id}`).addClass("active");
 
-  let page = Number(this.id) * 10;
+  let page = id * 10;
 
-  let productArray = await getProducts(page);
-
-  cardGenerator(productArray);
+  cardGenerator(allProductArray, page);
   toggleLoader(false);
-});
+}
 
-cardGenerator = (productArray) => {
+function cardGenerator(productArray, skip = 0) {
   productDiv.html("");
-
+  errorDiv.addClass("d-none");
   if (productArray.length === 0) {
     errorDiv.removeClass("d-none");
-    errorDiv.html("No more products to show");
+    errorDiv.html("<h1 class='text-center'>No products to show</h1>");
     return;
   }
+
+  productArray = productArray.slice(skip, skip + 10);
 
   productArray.forEach((product) => {
     let Dis = product.description;
@@ -120,31 +149,163 @@ cardGenerator = (productArray) => {
           <p class="card-text" id="productDis${product.id}">
           ${Dis.slice(0, 30)}
           </p>
-          <button id="productAddBtn-${
-            product.id
-          }" class="btn btn-primary">Add</button>
+
+          <p class="card-text" id="productCat${product.id}">
+          ${product.category.name}
+          </p>
+
+          <button id="productEditBtn-${product.id}" class="btn btn-primary">
+          Edit
+          </button>
+          
+          <button id="productDeleteBtn-${product.id}" class="btn btn-danger">
+          Delete
+          </button>
         </div>
       </div>`;
 
     productDiv.append(card);
-    $(`#productAddBtn-${product.id}`).click(() => {
-      addBtnClickHandler(product.id);
+    $(`#productEditBtn-${product.id}`).click(() => {
+      editBtnClickHandler(product.id);
+    });
+    $(`#productDeleteBtn-${product.id}`).click(() => {
+      deleteBtnClickHandler(product.id);
     });
   });
-};
+}
 
-async function addBtnClickHandler(id) {
-  let isProductPresent = PRODUCT_CART.purchasedProducts.find(
-    (product) => product.id === id
-  )
-    ? true
-    : false;
+function editBtnClickHandler(id) {
+  console.log(id);
+  window.location.href = `./pages/update.html?${id}`;
+}
 
-  if (isProductPresent) return;
+async function deleteBtnClickHandler(id) {
+  if (confirm("are you sure to delete the product?") === false) return;
 
-  let product = await getProducts(0, `/${id}`);
+  toggleLoader(true);
 
-  PRODUCT_CART.purchasedProducts.push(product);
+  fetch(GET_URL + "/" + id, { method: "DELETE" })
+    .then((res) => {
+      if (!res.ok) {
+        throw Error("something bad");
+      }
+      return res.json();
+    })
+    .then((data) => {
+      alert("product deleted successfully");
+      console.log(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+// sorting function
 
-  setLocalStorage("PRODUCT_CART", PRODUCT_CART);
+$("#sortSelectInput").change(sortHandler);
+
+function sortHandler() {
+  toggleLoader(true);
+
+  let selectValue = $("#sortSelectInput").val();
+
+  if (selectValue === "") {
+    sortProductArray("title", "asc");
+    toggleLoader();
+
+    return;
+  }
+
+  const functionMap = new Map([
+    ["sortPLH", () => sortProductArray("price", "asc")],
+    ["sortPHL", () => https://cosmofeed.com/vp/656d09e6d7a7e3001e1dbbf8
+
+https://cosmofeed.com/vp/656d09e6d7a7e3001e1dbbf8
+
+sortProductArray("price", "desc")],
+    ["sortNAZ", () => sortProductArray("title", "asc")],
+    ["sortNZA", () => sortProductArray("title", "desc")],
+  ]);
+
+  const selectedFunction = functionMap.get(selectValue);
+
+  if (selectedFunction) {
+    console.log(selectedFunction);
+    selectedFunction();
+  } else {
+    console.log("Errror in sorting function");
+  }
+
+  // switch (selectValue) {
+  //   case "sortPLH":
+  //     sortProductArray("price", "asc");
+  //     break;
+
+  //   case "sortPHL":
+  //     sortProductArray("price", "desc");
+
+  //     break;
+
+  //   case "sortNAZ":
+  //     sortProductArray("title", "asc");
+  //     break;
+
+  //   case "sortNZA":
+  //     sortProductArray("title", "desc");
+  //     break;
+
+  //   default:
+  //     break;
+  // }
+  setTimeout(() => {
+    toggleLoader();
+  }, 500);
+}
+
+function sortProductArray(property, order) {
+  allProductArray.sort((a, b) => {
+    if (order === "asc") {
+      return a[property] > b[property] ? 1 : -1;
+    } else {
+      return a[property] < b[property] ? 1 : -1;
+    }
+  });
+  divideIntoPages(allProductArray.length);
+  cardGenerator(allProductArray);
+}
+// filter change
+
+$("#filterSelectInput").change(filterHandler);
+
+async function filterHandler() {
+  toggleLoader(true);
+  let filterValue = $(this).val();
+
+  if (filterValue === "") {
+    intializeProducts();
+    return;
+  }
+
+  allProductArray = await getProducts();
+
+  allProductArray = allProductArray.filter((product) => {
+    return product.category.name === filterValue;
+  });
+
+  divideIntoPages(allProductArray.length);
+
+  cardGenerator(allProductArray);
+  toggleLoader(false);
+}
+
+// intialize the products
+
+async function intializeProducts() {
+  toggleLoader(true);
+
+  allProductArray = await getProducts();
+
+  divideIntoPages(allProductArray.length);
+
+  cardGenerator(allProductArray, 0);
+  toggleLoader(false);
 }

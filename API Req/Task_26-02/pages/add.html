@@ -20,10 +20,7 @@
             <a class="nav-link" href="../">Home</a>
           </div>
           <div class="nav-item mx-2">
-            <a class="nav-link" href="./pages/add.html">Add Product</a>
-          </div>
-          <div class="nav-item mx-2">
-            <a class="nav-link" href="./pages/update.html">Update Product</a>
+            <a class="nav-link" href="./add.html">Add Product</a>
           </div>
         </div>
       </div>
@@ -70,10 +67,25 @@
             This field is required
           </div>
         </div>
+
+        <div class="mb-3">
+          <label for="productCategory" class="form-label"
+            >Product Category</label
+          >
+
+          <select class="form-control form-select" id="productCategory">
+            <option selected value="">Select one</option>
+          </select>
+        </div>
+        <div id="category-error-div" class="my-3 alert alert-danger">
+          This field is required
+        </div>
+
         <button type="submit" class="btn btn-primary">Add Product</button>
       </form>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="./functions.js"></script>
+    <script src="./add.js"></script>
   </body>
 </html>
