@@ -1,0 +1,19 @@
+The useEffect()Hook is called
+with two arguments with two parameters.
+The first argument is a function
+that should be executed after every component evaluation
+if the specified dependencies changed.
+And the specified dependencies
+are the second argument that you pass in.
+That's an array full of dependencies
+and you will see how these dependencies look like
+throughout this module.
+So an array full of dependencies
+and whenever such a dependency changes
+that first function will re-run.
+And therefore in that first function
+you can put any side effect code
+and that code will then only execute
+when the dependencies specified by you changed
+and not when the component re-renders.
+So only when your dependencies changed.

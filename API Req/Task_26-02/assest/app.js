@@ -217,11 +217,7 @@ function sortHandler() {
 
   const functionMap = new Map([
     ["sortPLH", () => sortProductArray("price", "asc")],
-    ["sortPHL", () => https://cosmofeed.com/vp/656d09e6d7a7e3001e1dbbf8
-
-https://cosmofeed.com/vp/656d09e6d7a7e3001e1dbbf8
-
-sortProductArray("price", "desc")],
+    ["sortPHL", () => sortProductArray("price", "desc")],
     ["sortNAZ", () => sortProductArray("title", "asc")],
     ["sortNZA", () => sortProductArray("title", "desc")],
   ]);
